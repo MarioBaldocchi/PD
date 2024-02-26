@@ -9,3 +9,11 @@ def descomponerTiempo(df):
     df.drop('valid_time_gmt', axis=1, inplace=True)
     df.drop('expire_time_gmt', axis=1, inplace=True)
     return df
+
+def tratar_na(df):
+    for col in df.columns:
+        if df[col].isnull().all(): #Si la columna tiene todo nulos, la quitamos (no aporta información)
+            df = df.drop(col, axis = 1)
+        else:
+            df[col] = df[col].fillna(0) #fixme Revisar cuando los dataframes esten unidos
+    return df

@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 def extraccion_datos_boya():
     """Devuelve un dataFrame con los datos obtenidos de la boya localizada en la playa de Tramore"""
-    df = pd.read_csv("C:\\hlocal\\FuentePrincipal.csv", sep = ";", index_col=[0])
+    df = pd.read_csv("./FuentePrincipal.csv", sep = ";", index_col=[0])
     return df
 
 def extraccion_datos_clima(ini, fin):

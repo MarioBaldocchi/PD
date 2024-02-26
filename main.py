@@ -1,5 +1,6 @@
 from extraccion_datos import extraccion_datos_boya
 from extraccion_datos import extraccion_datos_clima
+from transformacion_datos import tratar_na
 from transformacion_datos import descomponerTiempo
 import json
 import pandas as pd
@@ -11,4 +12,6 @@ from datetime import datetime
 df_principal = extraccion_datos_boya()
 df_secundario = extraccion_datos_clima("01/01/2022", "31/01/2022")
 df_secundario = descomponerTiempo(df_secundario)
+
+df_secundario = tratar_na(df_principal)
 df_secundario
