@@ -19,6 +19,12 @@ def tratar_na(df):
     return df
 
 
+def quitar_columnas_innecesarias(df):
+    """Quita todas las columnas que tomen un solo valor. Devuelve el dataframe transformado"""
+    for col in df.columns:
+        if len(df[col].unique()) == 1:
+            df = df.drop(col, axis = 1)
+    return df
 def descomponerHoras(df):
     """Transforma columnas con los datos horarios a filas con columna hora"""
     new_df = None # dataframe separados por horas
