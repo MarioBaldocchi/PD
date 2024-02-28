@@ -1,10 +1,18 @@
 import pandas as pd
 import requests
 
-import extraccion_drive
+from extraccion_drive import procesar_archivo_info
+from extraccion_drive import descargar_archivo_directo
 def extraccion_datos_boya():
+
     """Devuelve un dataFrame con los datos obtenidos de la boya localizada en la playa de Tramore"""
-    df = pd.read_csv("./FuentePrincipal.csv", sep = ";", index_col=[0])
+
+    """Solo vamos a tener un archivo a descargar desde el drive, por lo que nuestra lista es 
+        de 1 solo elemento"""
+    tuplas_links = procesar_archivo_info("./archivos_info.txt")
+    tupla_link = tuplas_links[0]
+    archivo_destino, ruta_completa = descargar_archivo_directo(tupla_link[0],tupla_link[2], tupla_link[1])
+    df = pd.read_csv(ruta_completa, sep = ";", index_col=[0])
     return df
 
 def extraccion_datos_clima(ini, fin):

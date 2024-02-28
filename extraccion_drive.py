@@ -11,7 +11,7 @@ Formato esperado de 'archivos_info.txt':
 ID_de_Google_Drive,Nombre_Archivo_Local,Ruta_Local
 
 Ejemplo:
-1hGvKmNAkK...,mi_archivo.txt, 
+1hGvKmNAkK...,mi_archivo.txt,
 
 Requisitos:
 - Módulo 'requests' instalado en el entorno Python donde se ejecute este script.
@@ -79,7 +79,8 @@ def procesar_archivo_info(ruta_archivo_info):
     return archivos_info
 
 
-## Ejemplo de uso
+
+''' Ejemplo de uso
 
 # Ruta al archivo que contiene la información de los archivos a descargar
 ruta_archivo_info = 'info_archivos_GDrive.txt'
@@ -91,3 +92,5 @@ archivos_a_descargar = procesar_archivo_info(ruta_archivo_info)
 for id_archivo, nombre_archivo, directorio_destino in archivos_a_descargar:
     nombre_archivo_descargado, ruta_archivo_guardado = descargar_archivo_directo(id_archivo, directorio_destino, nombre_archivo)
     print(f"Archivo {nombre_archivo_descargado} guardado en: {ruta_archivo_guardado}")
+
+'''
