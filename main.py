@@ -8,7 +8,7 @@ from utils import *
 df_principal = extraccion_datos_boya()
 
 
-df_secundario = extraccion_datos_clima(stringToDatetime("01/01/2022"), stringToDatetime("31/01/2023"))
+df_secundario = extraccion_df_secundario(stringToDatetime("01/01/2022"), stringToDatetime("31/12/2023"))
 df_secundario = descomponerTiempo(df_secundario)
 print(df_secundario)
 df_principal = tratar_na(df_principal)

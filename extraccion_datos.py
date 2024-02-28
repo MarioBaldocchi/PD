@@ -46,7 +46,7 @@ def extraccion_df_secundario(fechaIni, fechaFin):
         if (result is None):
             result = extraccion_datos_clima(fechaInf, fechaSup)
         else:
-            result.concat(extraccion_datos_clima(fechaInf, fechaSup))
+            result = pd.concat([result, extraccion_datos_clima(fechaInf, fechaSup)])
         # siguiente intervalo de 30 dias
         fechaSup = fechaInf
         fechaInf = subtract30Days(fechaSup)
