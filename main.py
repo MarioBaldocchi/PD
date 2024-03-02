@@ -33,7 +33,7 @@ df_secundario.drop(columns=["day_ind", "wx_icon", "icon_extd", "gust", "wdir", "
 
 # Convertimos la columnas dirección de viento a variables dummy
 # Reemplazamos por NA los datos de wdir_cardinal == CALM para asi no salga en las variables dummy
-df_secundario[df_secundario.wdir_cardinal == 'CALM'].loc[:, "wdir_cardinal"] = pd.NA
+df_secundario.loc[df_secundario['wdir_cardinal'] == 'CALM', 'wdir_cardinal'] = pd.NA
 
 df_secundario = pd.get_dummies(df_secundario, prefix='wdir', columns=['wdir_cardinal'])
 
