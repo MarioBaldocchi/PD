@@ -32,7 +32,3 @@ df_secundario.drop(columns=["day_ind", "wx_icon", "icon_extd", "gust", "wdir"], 
 df_secundario.dropna(inplace=True)  #Quitamos las filas con algún na
 df_principal = tratar_na(df_principal) #En el caso de df_principal, los na representan 0's, por lo que los tratamos
 
-print(df_secundario['wx_phrase'].unique())
-print(df_secundario['uv_desc'].unique())
-print(df_secundario['feels_like'].unique())
-print(df_secundario['clds'].unique())
