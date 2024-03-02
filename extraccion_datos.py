@@ -4,7 +4,7 @@ from utils import subtract30Days
 
 from extraccion_drive import procesar_archivo_info
 from extraccion_drive import descargar_archivo_directo
-def extraccion_datos_boya():
+def extraccion_datos():
 
     """Devuelve un dataFrame con los datos obtenidos de la boya localizada en la playa de Tramore"""
 
@@ -43,13 +43,12 @@ def extraccion_df_secundario(fechaIni, fechaFin):
             # si se pasa del limite inferior, subirlo al limite
             fechaInf = fechaIni
 
-        if (result is None):
+        if result is None:
             result = extraccion_datos_clima(fechaInf, fechaSup)
         else:
             result = pd.concat([result, extraccion_datos_clima(fechaInf, fechaSup)])
         # siguiente intervalo de 30 dias
         fechaSup = fechaInf
         fechaInf = subtract30Days(fechaSup)
-
 
     return result

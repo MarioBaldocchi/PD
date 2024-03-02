@@ -13,7 +13,7 @@ def descomponerTiempo(df):
 def tratar_na(df):
     for col in df.columns:
         if df[col].isnull().all(): #Si la columna tiene todo nulos, la quitamos (no aporta información)
-            df = df.drop(col, axis = 1)
+            df = df.drop(columns=col)
         else:
             df[col] = df[col].fillna(0) #fixme Revisar cuando los dataframes esten unidos
     return df
@@ -23,7 +23,7 @@ def quitar_columnas_innecesarias(df):
     """Quita todas las columnas que tomen un solo valor. Devuelve el dataframe transformado"""
     for col in df.columns:
         if len(df[col].unique()) == 1:
-            df = df.drop(col, axis = 1)
+            df = df.drop(columns=col)
     return df
 def descomponerHoras(df):
     """Transforma columnas con los datos horarios a filas con columna hora"""
