@@ -22,8 +22,11 @@ df_secundario = quitar_columnas_innecesarias(df_secundario)
 day_ind: nos dice si es de noche(N) o de dia(D), lo podemos saber con la hora actual
 wx_icon: icono que se usó para la visualización(nube, lluvia)
 icon_extd: parecida a wx_icon
+clds: nivel de nubosidad, ya esta especidicada con numeros en la fuente principal.
+wx_phrase: Frase para describir el tiempo. Se calcula a partir de otras columnas.
+uv_desc: Descripcion del estado de ultravioleta. Se saca a aprtir de uv_index. 0-2 Low, 3-5 Moderate, 6-7 High
 """
-df_secundario.drop(columns=["day_ind", "wx_icon", "icon_extd", "gust", "wdir"], inplace=True)
+df_secundario.drop(columns=["day_ind", "wx_icon", "icon_extd", "gust", "wdir", "clds", "wx_phrase", "uv_desc"], inplace=True)
 
 #Quitando las columnas anteriormente mencionadas, nos quedan 17 observaciones (filas) con algún na en df_secundario. La mayoría (15) se dan el 1
 #de Febrero de 2022 debido a un error del aparato que calcula el uv_index (yo optaría por quitar las observaciones del 1
