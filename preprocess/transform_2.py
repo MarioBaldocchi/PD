@@ -38,6 +38,6 @@ def columnasAFilas(df, hora):
     # Renombramos las columnas (quitamos hora del fin)
     cols_sin_hora = selected_cols.str.slice(stop=-2)
     separate_df = separate_df.rename(dict(zip(separate_df.columns, cols_sin_hora)), axis=1)
-    separate_df["hora"] = hora
+    separate_df["hora"] = int(hora) # pasamos hora a numero
 
     return separate_df
