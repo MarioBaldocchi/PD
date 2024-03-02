@@ -17,7 +17,7 @@ df_secundario = quitar_columnas_innecesarias(df_secundario)
 
 #En general el df_secundario no tiene muchos na. Sin embargo, las columnas gust y wdir tienen demasiados, por lo que
 #en vez de eliminar observaciones, optamos por quitar las columnas. PD: la eliminación de la columna wdir no nos afecta
-#porque podemos obtener dicha información a partir de la columna , la cual en vez de ser numérica es categórica (OneHotEncoding)
+#porque podemos obtener dicha información a partir de la columna wdir_cardinal, la cual en vez de ser numérica es categórica (OneHotEncoding)
 df_secundario.drop(columns=['gust', 'wdir'], inplace=True)
 
 #Quitando las columnas anteriormente mencionadas, nos quedan 17 observaciones (filas) con algún na en df_secundario. La mayoría (15) se dan el 1
@@ -31,3 +31,5 @@ df_principal = tratar_na(df_principal) #En el caso de df_principal, los na repre
 print(f'df_secundario: {df_secundario.isna().sum()}')
 print(f'df_principal: {df_principal.isna().sum()}')
 
+for col in df_secundario.columns:
+    print(col, df_secundario[col].unique())
