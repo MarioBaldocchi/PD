@@ -38,6 +38,4 @@ df_principal = tratar_na(df_principal) #En el caso de df_principal, los na repre
 
 df_principal = descomponerHoras(df_principal)
 
-for col in df_principal:
-    print(col)
 
