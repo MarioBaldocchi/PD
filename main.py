@@ -30,6 +30,3 @@ df_principal = tratar_na(df_principal) #En el caso de df_principal, los na repre
 #Comprobacion de que no hay na en df_secundario y df_principal
 print(f'df_secundario: {df_secundario.isna().sum()}')
 print(f'df_principal: {df_principal.isna().sum()}')
-
-for col in df_secundario.columns:
-    print(col, df_secundario[col].unique())
