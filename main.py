@@ -1,7 +1,7 @@
 from adquisicion.extraccion_datos import *
 from preprocess.transform_1 import quitar_columnas_innecesarias
 from preprocess.transform_1 import tratar_na
-from preprocess.transform_2 import descomponerTiempo
+from preprocess.transform_2 import descomponerTiempoUnix
 from preprocess.transform_3 import aggregate_secondary
 from preprocess.transform_2 import descomponerHoras
 from utils.utils import *
@@ -9,8 +9,12 @@ from utils.utils import *
 """OBTENCIÓN DE DATOS EN BRUTO"""
 df_principal = extraccion_datos()
 df_secundario = extraccion_df_secundario(stringToDatetime("01/01/2022"), stringToDatetime("31/12/2023"))
-df_secundario = descomponerTiempo(df_secundario).sort_values(['anio', 'mes', 'dia'], ascending=[True, True, True])
+df_secundario = descomponerTiempoUnix(df_secundario)
 
+# Movemos la fecha del indice a la columna fecha y la transformamos en formato datetime pandas
+df_principal.reset_index(inplace=True)
+df_principal = df_principal.rename(columns={"index": 'fecha'})
+df_principal.fecha = pd.to_datetime(df_principal.fecha, format = '%d.%m.%Y')
 
 """TRANSFORMACIÓN DE LOS DATOS"""
 #Quitamos las columnas que solo tomen un valor (no aportan información relevante para las predicciones)
@@ -50,5 +54,10 @@ df_secundario.dropna(inplace=True)  #Quitamos las filas con algún na
 df_principal = tratar_na(df_principal) #En el caso de df_principal, los na representan 0's, por lo que los tratamos
 
 df_principal = descomponerHoras(df_principal)
+
+
+# unimos los dos dataframes
+
+df_merge = df_secundario.merge(df_principal, on=['anio', 'mes', 'dia', 'hora']).sort_values(['anio', 'mes', 'dia'], ascending=[True, True, True])
 
 

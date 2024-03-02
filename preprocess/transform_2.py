@@ -5,15 +5,17 @@ para asi tener las horas como filas, no como columnas
 
 import pandas as pd
 
-def descomponerTiempo(df):
+def descomponerTiempoUnix(df):
     """Descompone la columna valid_time_gmt en cuatro columnas nuevas: hora, dia, mes, anio. Elimina las columnas valid_time_gmt y expire_time_gmt"""
-    df['hora'] = pd.to_datetime(df['valid_time_gmt'], unit='s').dt.hour
-    df['dia'] = pd.to_datetime(df['valid_time_gmt'], unit='s').dt.day
-    df['mes'] = pd.to_datetime(df['valid_time_gmt'], unit='s').dt.month
-    df['anio'] = pd.to_datetime(df['valid_time_gmt'], unit='s').dt.year
-    df.drop('valid_time_gmt', axis=1, inplace=True)
-    df.drop('expire_time_gmt', axis=1, inplace=True)
-    return df
+    df_tmp = df.copy()
+    df_tmp['hora'] = pd.to_datetime(df['valid_time_gmt'], unit='s').dt.hour
+    df_tmp['dia'] = pd.to_datetime(df['valid_time_gmt'], unit='s').dt.day
+    df_tmp['mes'] = pd.to_datetime(df['valid_time_gmt'], unit='s').dt.month
+    df_tmp['anio'] = pd.to_datetime(df['valid_time_gmt'], unit='s').dt.year
+    df_tmp.drop('valid_time_gmt', axis=1, inplace=True)
+    df_tmp.drop('expire_time_gmt', axis=1, inplace=True)
+
+    return df_tmp
 
 def descomponerHoras(df):
     """Transforma columnas con los datos horarios a filas con columna hora"""
@@ -39,5 +41,8 @@ def columnasAFilas(df, hora):
     cols_sin_hora = selected_cols.str.slice(stop=-2)
     separate_df = separate_df.rename(dict(zip(separate_df.columns, cols_sin_hora)), axis=1)
     separate_df["hora"] = int(hora) # pasamos hora a numero
-
+    # para no perder la fecha
+    separate_df['dia'] = df.fecha.dt.day
+    separate_df['mes'] = df.fecha.dt.month
+    separate_df['anio'] = df.fecha.dt.year
     return separate_df
