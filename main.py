@@ -2,6 +2,7 @@ from adquisicion.extraccion_datos import *
 from preprocess.transform_1 import quitar_columnas_innecesarias
 from preprocess.transform_1 import tratar_na
 from preprocess.transform_2 import descomponerTiempo
+from preprocess.transform_2 import descomponerHoras
 from utils.utils import *
 
 """OBTENCIÓN DE DATOS EN BRUTO"""
@@ -34,4 +35,9 @@ df_secundario.drop(columns=["day_ind", "wx_icon", "icon_extd", "gust", "wdir", "
 #(al tener 2 observaciones seguríamos teniendo observaciones para todas las horas)
 df_secundario.dropna(inplace=True)  #Quitamos las filas con algún na
 df_principal = tratar_na(df_principal) #En el caso de df_principal, los na representan 0's, por lo que los tratamos
+
+df_principal = descomponerHoras(df_principal)
+
+for col in df_principal:
+    print(col)
 
