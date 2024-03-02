@@ -1,0 +1,18 @@
+temp: temperatura
+wx_phrase: describe el clima de manera general
+dewPt: temperatura en la que se puede comenzar a formar rocío y niebla (dew point temperature)
+heat_index: cuantifica la temperatura percibida por el cuerpo humano, basándose en la humedad y temperatura del aire
+rh: humedad relativa
+pressure: presión atmosférica
+vis: visibilidad
+wc: cuantifica la temperatura percibida por el cuerpo humano, basándose en la velocidad del viento y la temperatura del aire
+wdir_cardinal: dirección cardinal del viento
+wspd: velocidad del viento
+uv_index: intensidad de la radiación ulravioleta en la superficie terrestre
+feels_like: cuantifica la temperatura percibida por el cuerpo humano
+
+
+
+
+
+
