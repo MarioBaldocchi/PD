@@ -18,7 +18,12 @@ df_secundario = quitar_columnas_innecesarias(df_secundario)
 #En general el df_secundario no tiene muchos na. Sin embargo, las columnas gust y wdir tienen demasiados, por lo que
 #en vez de eliminar observaciones, optamos por quitar las columnas. PD: la eliminación de la columna wdir no nos afecta
 #porque podemos obtener dicha información a partir de la columna wdir_cardinal, la cual en vez de ser numérica es categórica (OneHotEncoding)
-df_secundario.drop(columns=['gust', 'wdir'], inplace=True)
+"""Eliminamos columnas del df_secundario:
+day_ind: nos dice si es de noche(N) o de dia(D), lo podemos saber con la hora actual
+wx_icon: icono que se usó para la visualización(nube, lluvia)
+icon_extd: parecida a wx_icon
+"""
+df_secundario.drop(columns=["day_ind", "wx_icon", "icon_extd", "gust", "wdir"], inplace=True)
 
 #Quitando las columnas anteriormente mencionadas, nos quedan 17 observaciones (filas) con algún na en df_secundario. La mayoría (15) se dan el 1
 #de Febrero de 2022 debido a un error del aparato que calcula el uv_index (yo optaría por quitar las observaciones del 1
