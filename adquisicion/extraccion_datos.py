@@ -12,17 +12,19 @@ def subtract30Days(date):
     return date - datetime.timedelta(days=30)
 
 def extraccion_datos():
-
-    """Devuelve un dataFrame con los datos obtenidos de la boya localizada en la playa de Tramore"""
-
-    """Solo vamos a tener un archivo a descargar desde el drive, por lo que nuestra lista es 
-        de 1 solo elemento"""
+    """Devuelve dos dataFrames: el de la fuente principal y el de la fuente secundaria"""
     path = Path.cwd()
-    tuplas_links = procesar_archivo_info(Path(path, "archivos_info.txt"))
-    tupla_link = tuplas_links[0]
-    archivo_destino, ruta_completa = descargar_archivo_directo(tupla_link[0],tupla_link[2], tupla_link[1])
-    df = pd.read_csv(ruta_completa, sep = ";", index_col=[0])
-    return df
+    lista_links_archivos = procesar_archivo_info(Path(path, "archivos_info.txt"))
+    rutas_archivos = []
+
+    for link_archivo in lista_links_archivos:
+        _, ruta_completa = descargar_archivo_directo(link_archivo[0], link_archivo[2], link_archivo[1])
+        rutas_archivos.append(ruta_completa)
+
+    df_principal = pd.read_parquet(rutas_archivos[0])
+    df_secundario = pd.read_parquet(rutas_archivos[1])
+
+    return df_principal, df_secundario
 
 def extraccion_datos_clima(ini, fin):
   """Dado un periodo máximo de 31 días, devuelve los datos climatológicos (por hora) de cada día"""
