@@ -2,6 +2,7 @@ from adquisicion.extraccion_datos import *
 from preprocess.transform_1 import quitar_columnas_innecesarias
 from preprocess.transform_1 import tratar_na
 from preprocess.transform_2 import descomponerTiempo
+from preprocess.transform_3 import aggregate_secondary
 from preprocess.transform_2 import descomponerHoras
 from utils.utils import *
 
@@ -28,6 +29,18 @@ wx_phrase: Frase para describir el tiempo. Se calcula a partir de otras columnas
 uv_desc: Descripcion del estado de ultravioleta. Se saca a aprtir de uv_index. 0-2 Low, 3-5 Moderate, 6-7 High
 """
 df_secundario.drop(columns=["day_ind", "wx_icon", "icon_extd", "gust", "wdir", "clds", "wx_phrase", "uv_desc"], inplace=True)
+
+
+# Convertimos la columnas dirección de viento a variables dummy
+# Reemplazamos por NA los datos de wdir_cardinal == CALM para asi no salga en las variables dummy
+df_secundario[df_secundario.wdir_cardinal == 'CALM'].loc[:, "wdir_cardinal"] = pd.NA
+
+df_secundario = pd.get_dummies(df_secundario, prefix='wdir', columns=['wdir_cardinal'])
+
+
+
+# Agregamos los datos por cada hora (nos quedamos con 1 fila para cada hora)
+df_secundario = aggregate_secondary(df_secundario, ['anio', 'mes', 'dia', 'hora'])
 
 #Quitando las columnas anteriormente mencionadas, nos quedan 17 observaciones (filas) con algún na en df_secundario. La mayoría (15) se dan el 1
 #de Febrero de 2022 debido a un error del aparato que calcula el uv_index (yo optaría por quitar las observaciones del 1
