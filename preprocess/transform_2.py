@@ -1,3 +1,8 @@
+"""
+Archivo para hallar la matriz "traspuesta" de los datos de cada dia,
+para asi tener las horas como filas, no como columnas
+
+"""
 import pandas as pd
 
 def descomponerTiempo(df):
@@ -10,21 +15,6 @@ def descomponerTiempo(df):
     df.drop('expire_time_gmt', axis=1, inplace=True)
     return df
 
-def tratar_na(df):
-    for col in df.columns:
-        if df[col].isnull().all(): #Si la columna tiene todo nulos, la quitamos (no aporta información)
-            df = df.drop(columns=col)
-        else:
-            df[col] = df[col].fillna(0) #fixme Revisar cuando los dataframes esten unidos
-    return df
-
-
-def quitar_columnas_innecesarias(df):
-    """Quita todas las columnas que tomen un solo valor. Devuelve el dataframe transformado"""
-    for col in df.columns:
-        if len(df[col].unique()) == 1:
-            df = df.drop(columns=col)
-    return df
 def descomponerHoras(df):
     """Transforma columnas con los datos horarios a filas con columna hora"""
     new_df = None # dataframe separados por horas

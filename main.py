@@ -1,7 +1,7 @@
 from adquisicion.extraccion_datos import *
-from preprocess.transformacion_datos import quitar_columnas_innecesarias
-from preprocess.transformacion_datos import tratar_na
-from preprocess.transformacion_datos import descomponerTiempo
+from preprocess.transform_1 import quitar_columnas_innecesarias
+from preprocess.transform_1 import tratar_na
+from preprocess.transform_2 import descomponerTiempo
 from utils.utils import *
 
 """OBTENCIÓN DE DATOS EN BRUTO"""
