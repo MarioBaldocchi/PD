@@ -1,2 +1,2 @@
-1WO48R9rndyBor-TBW7VRPh4Q91Ib_hn6,fuente_principal.parquet,.\raw
-1BxI0UC1Qwc6_eJeFjzluLVCin7-J2JNh,fuente_secundaria.parquet,.\raw
+1WO48R9rndyBor-TBW7VRPh4Q91Ib_hn6,fuente_principal.parquet,.\\raw
+1BxI0UC1Qwc6_eJeFjzluLVCin7-J2JNh,fuente_secundaria.parquet,.\\raw
