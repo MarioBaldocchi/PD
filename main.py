@@ -49,6 +49,8 @@ df_secundario = aggregate_secondary(df_secundario, ['anio', 'mes', 'dia', 'hora'
 #(al tener 2 observaciones seguríamos teniendo observaciones para todas las horas)
 df_secundario.dropna(inplace=True)  #Quitamos las filas con algún na
 df_principal = tratar_na(df_principal) #En el caso de df_principal, los na representan 0's, por lo que los tratamos
+# El - indica ausencia algo, ej. viento, por ello podemos reemplazarlo por ceros
+df_principal = df_principal.replace('-', 0)
 
 df_principal = descomponerHoras(df_principal)
 
