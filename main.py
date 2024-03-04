@@ -7,15 +7,12 @@ from preprocess.transform_3 import aggregate_secondary
 from preprocess.transform_2 import descomponerHoras
 from exploracion.exploracion_datos import distribuciones
 from exploracion.exploracion_datos import correlaciones
+from exploracion.exploracion_datos import distribuciones_dummies
 from utils.utils import *
 
 
 """OBTENCIÓN DE DATOS EN BRUTO"""
 df_principal, df_secundario = extraccion_datos()
-for col in df_principal.columns:
-    print(col)
-    print(df_principal[col].unique())
-
 df_secundario = descomponerTiempoUnix(df_secundario).sort_values(['anio', 'mes', 'dia'], ascending=[True, True, True])
 
 
@@ -58,10 +55,9 @@ df_secundario = aggregate_secondary(df_secundario, ['anio', 'mes', 'dia', 'hora'
 #(al tener 2 observaciones seguríamos teniendo observaciones para todas las horas)
 df_secundario.dropna(inplace=True)  #Quitamos las filas con algún na
 df_principal = tratar_na(df_principal) #En el caso de df_principal, los na representan 0's, por lo que los tratamos
-# El - indica ausencia algo, ej. viento, por ello podemos reemplazarlo por ceros
-df_principal = df_principal.replace('-', 0)
 
-#print(df_principal)
+#En cambio los guiones representan datos no evaluados. Por tanto tenemos que eliminar las filas que contengan guiones
+df_principal = df_principal[~df_principal.applymap(lambda x: x == '-').any(axis=1)]
 
 df_principal = descomponerHoras(df_principal)
 
@@ -73,6 +69,15 @@ df_def = df_secundario.merge(df_principal, on=['anio', 'mes', 'dia', 'hora']).so
 
 df_def = cambiar_tipo('int', ['Vviento', 'PeriodoOlas', 'Temperatura', 'Nubosidad'], df_def)
 df_def = cambiar_tipo('float', ['AlturaOlas', 'Lluvia'], df_def)
+
+
 print(df_def.columns)
+
+#Visualizamos las columnas de nuestro conjunto de datos final
+distribuciones(df_def[['temp', 'dewPt', 'heat_index', 'rh','pressure', 'vis', 'wc', 'wspd', 'feels_like', 'uv_index',  'Vviento', 'AlturaOlas','PeriodoOlas', 'Temperatura', 'Lluvia', 'Nubosidad']])
+
+distribuciones_dummies(df_def[['wdir_E','wdir_ENE', 'wdir_ESE', 'wdir_N', 'wdir_NE', 'wdir_NNE', 'wdir_NNW', 'wdir_NW', 'wdir_S', 'wdir_SE', 'wdir_SSE', 'wdir_SSW', 'wdir_SW', 'wdir_VAR', 'wdir_W', 'wdir_WNW', 'wdir_WSW']])
+
+#Correlaciones de columnas numéricas. Hemos eliminado todas las dummies procedentes de wdir_direction
 correlaciones(df_def[['temp', 'dewPt', 'heat_index', 'rh','pressure', 'vis', 'wc', 'wspd', 'feels_like', 'uv_index',  'Vviento', 'AlturaOlas','PeriodoOlas', 'Temperatura', 'Lluvia', 'Nubosidad']])
 
