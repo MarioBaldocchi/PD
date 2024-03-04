@@ -1,10 +1,14 @@
 from adquisicion.extraccion_datos import *
 from preprocess.transform_1 import quitar_columnas_innecesarias
 from preprocess.transform_1 import tratar_na
+from preprocess.transform_1 import cambiar_tipo
 from preprocess.transform_2 import descomponerTiempoUnix
 from preprocess.transform_3 import aggregate_secondary
 from preprocess.transform_2 import descomponerHoras
+from exploracion.exploracion_datos import distribuciones
+from exploracion.exploracion_datos import correlaciones
 from utils.utils import *
+
 
 """OBTENCIÓN DE DATOS EN BRUTO"""
 df_principal, df_secundario = extraccion_datos()
@@ -43,7 +47,7 @@ df_secundario.drop(columns=["day_ind", "wx_icon", "icon_extd", "gust", "wdir", "
 # Reemplazamos por NA los datos de wdir_cardinal == CALM para asi no salga en las variables dummy
 df_secundario.loc[df_secundario['wdir_cardinal'] == 'CALM', 'wdir_cardinal'] = pd.NA
 
-df_secundario = pd.get_dummies(df_secundario, prefix='wdir', columns=['wdir_cardinal'])
+df_secundario = pd.get_dummies(df_secundario, prefix='wdir', columns=['wdir_cardinal'], dtype='int')
 
 # Agregamos los datos por cada hora (nos quedamos con 1 fila para cada hora)
 df_secundario = aggregate_secondary(df_secundario, ['anio', 'mes', 'dia', 'hora'])
@@ -62,6 +66,13 @@ df_principal = df_principal.replace('-', 0)
 df_principal = descomponerHoras(df_principal)
 
 # unimos los dos dataframes
-df_merge = df_secundario.merge(df_principal, on=['anio', 'mes', 'dia', 'hora']).sort_values(['anio', 'mes', 'dia'], ascending=[True, True, True])
+df_def = df_secundario.merge(df_principal, on=['anio', 'mes', 'dia', 'hora']).sort_values(['anio', 'mes', 'dia'], ascending=[True, True, True])
 
+#vemos que algunas columnas no tienen el tipo correcto
+#print(df_def.dtypes)
+
+df_def = cambiar_tipo('int', ['Vviento', 'PeriodoOlas', 'Temperatura', 'Nubosidad'], df_def)
+df_def = cambiar_tipo('float', ['AlturaOlas', 'Lluvia'], df_def)
+print(df_def.columns)
+correlaciones(df_def[['temp', 'dewPt', 'heat_index', 'rh','pressure', 'vis', 'wc', 'wspd', 'feels_like', 'uv_index',  'Vviento', 'AlturaOlas','PeriodoOlas', 'Temperatura', 'Lluvia', 'Nubosidad']])
 
