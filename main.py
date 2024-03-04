@@ -5,8 +5,10 @@ from preprocess.transform_1 import cambiar_tipo
 from preprocess.transform_2 import descomponerTiempoUnix
 from preprocess.transform_3 import aggregate_secondary
 from preprocess.transform_2 import descomponerHoras
+from exploracion.exploracion_datos import distribuciones
+from exploracion.exploracion_datos import correlaciones
 from utils.utils import *
-import matplotlib.pyplot as plt
+
 
 """OBTENCIÓN DE DATOS EN BRUTO"""
 df_principal, df_secundario = extraccion_datos()
@@ -62,11 +64,8 @@ df_def = df_secundario.merge(df_principal, on=['anio', 'mes', 'dia', 'hora']).so
 #vemos que algunas columnas no tienen el tipo correcto
 #print(df_def.dtypes)
 
-df_def = cambiar_tipo('int',['Vviento', 'PeriodoOlas', 'Temperatura', 'Nubosidad'], df_def)
-df_def = cambiar_tipo('float',['AlturaOlas', 'Lluvia'], df_def)
-for col in df_def.columns:
-    print(col)
-    plt.hist(df_def[col])
-    plt.title(col)
-    plt.show()
+df_def = cambiar_tipo('int', ['Vviento', 'PeriodoOlas', 'Temperatura', 'Nubosidad'], df_def)
+df_def = cambiar_tipo('float', ['AlturaOlas', 'Lluvia'], df_def)
+print(df_def.columns)
+correlaciones(df_def[['temp', 'dewPt', 'heat_index', 'rh','pressure', 'vis', 'wc', 'wspd', 'feels_like', 'uv_index',  'Vviento', 'AlturaOlas','PeriodoOlas', 'Temperatura', 'Lluvia', 'Nubosidad']])
 

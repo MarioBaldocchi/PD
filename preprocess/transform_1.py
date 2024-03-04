@@ -15,6 +15,7 @@ def cambiar_tipo(tipo, columnas, df):
     for col in columnas:
         df[col] = df[col].astype(tipo)
     return df
+
 def tratar_na(df):
     """Sustituye los nas del dataframe por 0's"""
     for col in df.columns:
