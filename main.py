@@ -8,7 +8,12 @@ from utils.utils import *
 
 """OBTENCIÓN DE DATOS EN BRUTO"""
 df_principal, df_secundario = extraccion_datos()
+for col in df_principal.columns:
+    print(col)
+    print(df_principal[col].unique())
+
 df_secundario = descomponerTiempoUnix(df_secundario).sort_values(['anio', 'mes', 'dia'], ascending=[True, True, True])
+
 
 # Movemos la fecha del indice a la columna fecha y la transformamos en formato datetime pandas
 df_principal.reset_index(inplace=True)
@@ -51,6 +56,8 @@ df_secundario.dropna(inplace=True)  #Quitamos las filas con algún na
 df_principal = tratar_na(df_principal) #En el caso de df_principal, los na representan 0's, por lo que los tratamos
 # El - indica ausencia algo, ej. viento, por ello podemos reemplazarlo por ceros
 df_principal = df_principal.replace('-', 0)
+
+#print(df_principal)
 
 df_principal = descomponerHoras(df_principal)
 
