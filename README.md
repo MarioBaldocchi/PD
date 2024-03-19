@@ -1,4 +1,3 @@
-Trabajo de Proyectos de Datos 2023-2024
 
 ![image](https://github.com/MarioBaldocchi/PD/assets/118186855/df659a18-929d-48c8-b30d-f4d3f70ca0ee)
 
