@@ -2,8 +2,8 @@ import pandas as pd
 import requests
 import datetime
 
-from .extraccion_drive import procesar_archivo_info
-from .extraccion_drive import descargar_archivo_directo
+from extraccion_drive import procesar_archivo_info
+from extraccion_drive import descargar_archivo_directo
 from pathlib import Path
 
 
@@ -20,11 +20,10 @@ def extraccion_datos():
     for link_archivo in lista_links_archivos:
         _, ruta_completa = descargar_archivo_directo(link_archivo[0], link_archivo[2], link_archivo[1])
         rutas_archivos.append(ruta_completa)
+    #df_principal = pd.read_parquet(rutas_archivos[0])
+    #df_secundario = pd.read_parquet(rutas_archivos[1])
 
-    df_principal = pd.read_parquet(rutas_archivos[0])
-    df_secundario = pd.read_parquet(rutas_archivos[1])
-
-    return df_principal, df_secundario
+    #return df_principal, df_secundario
 
 def extraccion_datos_clima(ini, fin):
   """Dado un periodo máximo de 31 días, devuelve los datos climatológicos (por hora) de cada día"""

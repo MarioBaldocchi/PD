@@ -4,18 +4,20 @@ para asi tener las horas como filas, no como columnas
 """
 
 import pandas as pd
+from transform_general import *
 
-def descomponerTiempoUnix(df):
-    """Descompone la columna valid_time_gmt en cuatro columnas nuevas: hora, dia, mes, anio. Elimina las columnas valid_time_gmt y expire_time_gmt"""
-    df_tmp = df.copy()
-    df_tmp['hora'] = pd.to_datetime(df['valid_time_gmt'], unit='s').dt.hour
-    df_tmp['dia'] = pd.to_datetime(df['valid_time_gmt'], unit='s').dt.day
-    df_tmp['mes'] = pd.to_datetime(df['valid_time_gmt'], unit='s').dt.month
-    df_tmp['anio'] = pd.to_datetime(df['valid_time_gmt'], unit='s').dt.year
-    df_tmp.drop('valid_time_gmt', axis=1, inplace=True)
-    df_tmp.drop('expire_time_gmt', axis=1, inplace=True)
+def preprocess_boya(df):
+    df.reset_index(inplace=True)
+    df.rename(columns={"index": 'fecha'}, inplace=True)
+    df.fecha = pd.to_datetime(df.fecha, format='%d.%m.%Y')
+    df = quitar_columnas_innecesarias(df)
+    # Los na representan 0's, por lo que los tratamos
+    df = tratar_na(df)
+    # En cambio los guiones representan datos no evaluados. Por tanto tenemos que eliminar las filas que contengan guiones
+    df = df[~df.map(lambda x: x == '-').any(axis=1)]
+    df = descomponerHoras(df)
 
-    return df_tmp
+    return df
 
 def descomponerHoras(df):
     """Transforma columnas con los datos horarios a filas con columna hora"""
