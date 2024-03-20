@@ -35,6 +35,15 @@ Estando en esa consola con el entorno activo, instalamos los modulos necesarios
 
 `pip install -r requirements.txt`
 
+## Setup del programa
+Carga de datos del drive (a la carpeta raw, especidicado en archivos_info.txt)
+
+`python ./adquisicion/main.py`
+
+Preprocesamiento de datos, especificando los parámetros
+
+`python ./preprocess/main.py --ruta_boya ./raw/fuente_principal.parquet --ruta_meteo ./raw/fuente_secundaria.parquet --ruta_salida ./clean/df_definitivo.parquet`
+
 Inicializar programa
 
 `python main.py`
