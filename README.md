@@ -6,7 +6,8 @@
 * [Installación y Setup](#installación-y-setup)
 * [Datos](#datos)
 ### Misión
-Nuestra principal misión es realizar predicciónes de las alturas de las olas para mejorar la experiencia de los surfistas
+Nuestra principal misión es realizar predicciones de las alturas de las olas e Tramore para mejorar la experiencia de los surfistas.
+Para ello, nos apoyamos en distintas fuentes como páginas web climatológicas y oceanográficas.
 
 # Installación y Setup
 ## Python y packetes usados (summary requirements.txt)
@@ -41,7 +42,8 @@ Inicializar programa
 
 # Datos
 ## Source Data
-Link de donde se han obtenido los datos de la boya: https://www.windguru.cz/archive.php?id_spot=47761&id_model=3&date_from=2023-01-01&date_to=2024-01-01
+Link de donde se han obtenido los datos de la boya: 
+https://www.windguru.cz/archive.php?id_spot=47761&id_model=3&date_from=2023-01-01&date_to=2024-01-01
 
 
 ## Data Acquisition
