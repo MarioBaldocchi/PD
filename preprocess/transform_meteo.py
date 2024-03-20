@@ -3,7 +3,7 @@ Archivo preprocesar el dataframe de datos meteorológicos(df_secundario)
 """
 
 import pandas as pd
-from transform_general import *
+from transform_utils import *
 from agregacion_hora import *
 def preprocess_meteo(df):
     # Movemos la fecha del indice a la columna fecha y la transformamos en formato datetime pandas

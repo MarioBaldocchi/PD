@@ -1,25 +1,22 @@
-from transform_meteo import *
-from transform_boya import *
-
+from transform_main import *
+import argparse
 def main():
-    # Cargamos datos en bruto
-    df_principal, df_secundario = pd.read_parquet("raw/fuente_principal.parquet"),  pd.read_parquet("raw/fuente_secundaria.parquet")
+    # Script args
+    parser = argparse.ArgumentParser(description="Script para la adquisición y procesamiento de datos.")
+    parser.add_argument('--ruta_boya', required=True, help="Ruta del archivo de datos de la boya(df_primario). Especifica el camino completo o relativo al archivo que contiene los datos que se desean procesar.")
+    parser.add_argument('--ruta_meteo', required=True, help="Ruta del archivo de datos meteorológicos(df_secundario). Especifica el camino completo o relativo al archivo que contiene los datos que se desean procesar.")
+    parser.add_argument('--ruta_salida', required=True, help="Ruta para guardar los datos procesados. Indica dónde se desea almacenar el resultado del procesamiento de datos, incluyendo el nombre del archivo de salida.")
+    args = parser.parse_args()
 
-    # Preprocesamos por separado
-    df_principal = preprocess_boya(df_principal)
-    df_secundario = preprocess_meteo(df_secundario)
+    try:
+        df_def = transform_main(args.ruta_boya, args.ruta_meteo)
+        # Guardamos el conjunto de datos definitivo
+        df_def.to_parquet(args.ruta_salida)
+        print("Prerocesamiento de datos se completó exitosamente.")
+    except Exception as e:
+        print(f"Ocurrió un error durante el preprocesamiento de los datos: {e}")
 
-    # unimos los dos dataframes
-    df_def = df_secundario.merge(df_principal, on=['anio', 'mes', 'dia', 'hora']).sort_values(['anio', 'mes', 'dia'], ascending=[True, True, True])
 
-    #vemos que algunas columnas no tienen el tipo correcto
-    #print(df_def.dtypes)
-
-    df_def = cambiar_tipo('int', ['Vviento', 'PeriodoOlas', 'Temperatura', 'Nubosidad'], df_def)
-    df_def = cambiar_tipo('float', ['AlturaOlas', 'Lluvia'], df_def)
-
-    # Guardamos el conjunto de datos definitivo
-    df_def.to_parquet("clean/df_definitivo.parquet")
 
 if __name__ == '__main__':
     main()

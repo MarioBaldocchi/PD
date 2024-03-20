@@ -3,7 +3,7 @@ Archivo para preprocesar los datos de boya(df_principal)
 """
 
 import pandas as pd
-from transform_general import *
+from transform_utils import *
 
 def preprocess_boya(df):
     df.reset_index(inplace=True)
