@@ -69,16 +69,9 @@ El preprocesamiento se divide en las siguientes etapas:
 # Estructura del proyecto
 
 ```bash
-├── data
-│   ├── data1.csv
-│   ├── data2.csv
-│   ├── cleanedData
-│       ├── cleaneddata1.csv
-|       └── cleaneddata2.csv
-├── data_acquisition.py
-├── data_preprocessing.ipynb
-├── data_analysis.ipynb
-├── data_modelling.ipynb
-├── README.md
-└── .gitignore
+├── adquisicion (lógica de captura de la api/descarga de los datos del drive)
+├── preprocess (lógica de preprocesado y limpieza de los datos)
+├── utils (herramientas de uso adicional)
+├── metadata (descripción de los datos)
+├── exploracion
 ```
