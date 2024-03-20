@@ -1,13 +1,13 @@
 import pandas as pd
 
-from exploracion.exploracion_datos import distribuciones
-from exploracion.exploracion_datos import correlaciones
-from exploracion.exploracion_datos import distribuciones_dummies
+from exploracion.exploracion_datos import *
 
 df_def = pd.read_parquet("./clean/df_definitivo.parquet")
 
 '''Ahora vamos a realizar un breve análisis exploratorio para visualizar mejor los datos y 
 poder entender mejor el proceso de predicción de la siguiente práctica '''
+
+olasPorTiempo(df_def, 2023)
 
 distribuciones(df_def[['temp', 'dewPt', 'heat_index', 'rh','pressure', 'vis', 'wc', 'wspd', 'feels_like', 'uv_index',  'Vviento', 'AlturaOlas','PeriodoOlas', 'Temperatura', 'Lluvia', 'Nubosidad']])
 #Ahora visualizamos todas las variables dummies juntas
