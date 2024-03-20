@@ -42,7 +42,7 @@ Carga de datos del drive (a la carpeta raw, especidicado en archivos_info.txt)
 
 Preprocesamiento de datos, especificando los parámetros
 
-`python ./preprocess/main.py --ruta_boya ./raw/fuente_principal.parquet --ruta_meteo ./raw/fuente_secundaria.parquet --ruta_salida ./clean/df_definitivo.parquet`
+`python ./preprocess/main.py --ruta_boya ./raw/fuente_principal.parquet --ruta_meteo ./raw/fuente_secundaria.parquet`
 
 Inicializar programa
 
