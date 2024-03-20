@@ -1,6 +1,5 @@
 """
-Archivo para hallar la matriz "traspuesta" de los datos de cada dia,
-para asi tener las horas como filas, no como columnas
+Archivo para preprocesar los datos de boya(df_principal)
 """
 
 import pandas as pd
@@ -15,6 +14,7 @@ def preprocess_boya(df):
     df = tratar_na(df)
     # En cambio los guiones representan datos no evaluados. Por tanto tenemos que eliminar las filas que contengan guiones
     df = df[~df.map(lambda x: x == '-').any(axis=1)]
+    # Para tener las horas como filas, no como columnas
     df = descomponerHoras(df)
 
     return df
