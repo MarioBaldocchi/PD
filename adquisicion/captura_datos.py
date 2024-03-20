@@ -3,28 +3,30 @@ import datetime
 import pandas as pd
 
 def extraccion_df_meteo(fechaIni, fechaFin):
-    """fechaIni y fechaFin son gechas en formato datetime de python"""
+    """fechaIni y fechaFin son fechas en formato datetime de python"""
     result = None
 
+    # realizaremos consultas a la api de la forma extraccion_meteo_api(fechaInf, fechaSup)
     fechaSup = fechaFin
     fechaInf = subtract30Days(fechaSup)
     while(fechaIni < fechaSup):
         if (fechaIni > fechaInf):
-            # si se pasa del limite inferior, subirlo al limite
+            # intervalo menor de 30 días
+            # fechaInf < fechaIni -> intervalo [fechaIni, fechaSup]
             fechaInf = fechaIni
 
         if result is None:
-            result = extraccion_datos_clima(fechaInf, fechaSup)
+            result = extraccion_meteo_api(fechaInf, fechaSup)
         else:
-            result = pd.concat([result, extraccion_datos_clima(fechaInf, fechaSup)])
+            result = pd.concat([result, extraccion_meteo_api(fechaInf, fechaSup)])
         # siguiente intervalo de 30 dias
         fechaSup = fechaInf
         fechaInf = subtract30Days(fechaSup)
 
     return result
 
-def extraccion_datos_clima(ini, fin):
-  """Dado un periodo máximo de 31 días, devuelve los datos climatológicos (por hora) de cada día"""
+def extraccion_meteo_api(ini, fin):
+  """Dado un periodo, máximo 31 días, devuelve los datos climatológicos (por hora) de cada día"""
     # ini y fin en formato datetime lo pasamos a int
   fechaIni = int(ini.strftime("%Y%m%d"))
   fechaFin = int(fin.strftime("%Y%m%d"))
