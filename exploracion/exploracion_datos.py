@@ -18,10 +18,24 @@ def distribuciones_dummies(df):
             i = i + 1
         plt.show()
 
-def correlaciones(df):
-    sns.heatmap(data=df.corr(), annot=False)
+def correlaciones(df, method = "pearson"):
+    sns.heatmap(data=df.corr(method=method), annot=False)
     plt.show()
 
+def analisis_dummies(df, key):
+    # Analisis media y desviaciones dummies
+    medias = []
+    desviaciones = []
+    labels = []
+    for c in df.columns:
+        if (c.startswith(key)):
+            labels.append(c[len(key):])
+            medias.append(df[df[c] == 1].AlturaOlas.mean())
+            desviaciones.append(df[df[c] == 1].AlturaOlas.std())
+    df_analitics = pd.DataFrame({'media': medias, 'desviacion': desviaciones, 'direccion viento': labels})
+    df_analitics.set_index('direccion viento', inplace=True)
+    df_analitics.plot(kind="line")
+    plt.show()
 def olasPorTiempo(df, year):
     # Vemos las alturas de las olas para cada mes de year
     rows, cols = 4, 3
