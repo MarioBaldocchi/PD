@@ -1,6 +1,7 @@
 from transform_main import *
 import argparse
-from pathlib import Path
+import os
+
 def main():
     # Script args
     parser = argparse.ArgumentParser(description="Script para la adquisición y procesamiento de datos.")
@@ -15,7 +16,8 @@ def main():
         df_def = transform_main(args.ruta_boya, args.ruta_meteo)
         ruta = args.ruta_salida
         if ruta is None: # si no se especifico la salida, guarda en clean/df_definitivo.parquet
-            Path.mkdir("clean", exist_ok=True)
+            if (not os.path.isdir("clean")):
+                os.mkdir("clean")
             ruta = "clean/df_definitivo.parquet"
         # Guardamos el conjunto de datos definitivo
         df_def.to_parquet(ruta)
