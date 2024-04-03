@@ -1,5 +1,5 @@
 import pandas as pd
-
+from sklearn.model_selection import train_test_split
 from exploracion.exploracion_datos import *
 
 df_def = pd.read_parquet("./clean/df_definitivo.parquet")
