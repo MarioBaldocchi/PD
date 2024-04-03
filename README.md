@@ -14,7 +14,7 @@ Para ello, nos apoyamos en distintas fuentes como páginas web climatológicas y
 - **Python `v3.11`**
 - **Data Manipulation:** `pandas`, `numpy`
 - **Data Visualization:** `matplotlib`
-- **Data Mining:** `requests`, 'json', 'Path'
+- **Data Mining:** `requests`, `json`, `Path`
 
 ## Creación entorno virtual
 Creamos el entorno virtual en la carpeta venv(ejecutamos desde la raiz del proyecto)
