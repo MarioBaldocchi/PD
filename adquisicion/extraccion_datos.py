@@ -11,7 +11,4 @@ def extraccion_datos():
     for link_archivo in lista_links_archivos:
         _, ruta_completa = descargar_archivo_directo(link_archivo[0], link_archivo[2], link_archivo[1])
         rutas_archivos.append(ruta_completa)
-    #df_principal = pd.read_parquet(rutas_archivos[0])
-    #df_secundario = pd.read_parquet(rutas_archivos[1])
 
-    #return df_principal, df_secundario

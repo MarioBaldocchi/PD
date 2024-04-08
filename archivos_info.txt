@@ -1,2 +1,3 @@
 1HVvZSYTkCD4SUcMQsUJ7hNpesR2Na_e6,fuente_principal.parquet,raw
 1dXmxPmPYymWiIMJxMGf80SR4i8eIjdqm,fuente_secundaria.parquet,raw
+1ut9yoqRsYiwBwunMuKXGNKBt8DQuVcGE,fuente_terciaria.csv,raw
