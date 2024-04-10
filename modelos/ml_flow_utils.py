@@ -20,7 +20,7 @@ class MLFlow:
             "MEAN_ABS_ERROR": mean_absolute_error(y_true, y_predict),
         }
 
-    def persist_model_to_mlflow(self, X_train, y_train, X_test, y_test, model, params, train_info=""):
+    def persist_model_to_mlflow(self, X_train, X_test, y_train, y_test, model, params, train_info=""):
         """
         @param X_train: matrix, variables explicativas del conjunto TRAIN
         @param y_train: matrix, variable respuesta del conjunto TRAIN
