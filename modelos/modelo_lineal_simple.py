@@ -1,20 +1,18 @@
-from setuptools import setup
-import mlflow
+from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import load_diabetes
-from sklearn.ensemble import RandomForestRegressor
+from ml_flow_utils import MLFlow
 
-# set the experiment id
-mlflow.set_experiment(experiment_name="0")
-#pip install threadpoolctl==3.1.0
-mlflow.autolog()
+flo = MLFlow("regression")
+RANDOM_STATE = 777
 db = load_diabetes()
 
-X_train, X_test, y_train, y_test = train_test_split(db.data, db.target)
+X_train, X_test, y_train, y_test = train_test_split(db.data, db.target, random_state=RANDOM_STATE)
+
+params = {}
 
 # Create and train models.
-rf = RandomForestRegressor(n_estimators=100, max_depth=6, max_features=3)
-rf.fit(X_train, y_train)
+model = LinearRegression(**params)
+model.fit(X_train, y_train)
 
-# Use the model to make predictions on the test dataset.
-predictions = rf.predict(X_test)
+flo.persist_model_to_mlflow(X_train, y_train, X_test, y_test, model, params, "Regresión lineal")
