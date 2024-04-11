@@ -8,12 +8,13 @@ def main():
     # Obligatorios
     parser.add_argument('--ruta_boya', required=True, help="Ruta del archivo de datos de la boya(df_primario). Especifica el camino completo o relativo al archivo que contiene los datos que se desean procesar.")
     parser.add_argument('--ruta_meteo', required=True, help="Ruta del archivo de datos meteorológicos(df_secundario). Especifica el camino completo o relativo al archivo que contiene los datos que se desean procesar.")
+    parser.add_argument('--ruta_lunar', required=True, help="Ruta del archivo de datos lunares(df_terciario). Especifica el camino completo o relativo al archivo que contiene los datos que se desean procesar.")
     # Opcional, ruta de salida
     parser.add_argument('--ruta_salida', required=False, help="Ruta para guardar los datos procesados. Indica dónde se desea almacenar el resultado del procesamiento de datos, incluyendo el nombre del archivo de salida.")
     args = parser.parse_args()
 
     try:
-        df_def = transform_main(args.ruta_boya, args.ruta_meteo)
+        df_def = transform_main(args.ruta_boya, args.ruta_meteo, args.ruta_lunar)
         ruta = args.ruta_salida
         if ruta is None: # si no se especifico la salida, guarda en clean/df_definitivo.parquet
             if (not os.path.isdir("clean")):
