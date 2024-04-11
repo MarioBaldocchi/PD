@@ -9,6 +9,7 @@ class MLFlow:
         '''
         @param exp_title: nombre del experimento
         '''
+        #mlflow.sklearn.autolog() - selecciona automaticamente las metricas a guardar
         mlflow.set_tracking_uri(uri="http://127.0.0.1:5000")
         mlflow.set_experiment(exp_title)
 

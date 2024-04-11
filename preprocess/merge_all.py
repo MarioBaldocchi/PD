@@ -3,7 +3,7 @@ from transform_meteo import *
 from transform_lunar import *
 from transform_utils import *
 
-def transform_main(path_raw_boya, path_raw_meteo, path_raw_lunar):
+def merge_all(path_raw_boya, path_raw_meteo, path_raw_lunar):
     # Cargamos datos en bruto
     df_principal = pd.read_parquet(path_raw_boya)
     df_secundario = pd.read_parquet(path_raw_meteo)

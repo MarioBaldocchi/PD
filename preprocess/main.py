@@ -1,4 +1,4 @@
-from transform_main import *
+from merge_all import *
 import argparse
 import os
 
@@ -14,7 +14,7 @@ def main():
     args = parser.parse_args()
 
     try:
-        df_def = transform_main(args.ruta_boya, args.ruta_meteo, args.ruta_lunar)
+        df_def = merge_all(args.ruta_boya, args.ruta_meteo, args.ruta_lunar)
         ruta = args.ruta_salida
         if ruta is None: # si no se especifico la salida, guarda en clean/df_definitivo.parquet
             if (not os.path.isdir("clean")):

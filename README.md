@@ -48,7 +48,24 @@ Inicializar programa
 
 `python main.py`
 
+## Uso de mlflow
+### Levantamiento del servidor
+Los resultados se guardarán en el archivo mlruns.db
 
+`mlflow ui --port 5000 --backend-store-uri sqlite:///mlruns.db`
+### Guardar un modelo
+Entrenamos el modelo
+```
+flo = MLFlow(<nombre de la técnica usada (regresion lineal/ arboles de decisión...)>)
+params = {}
+model = LinearRegression(**params)
+model.fit(X_train, y_train)
+```
+
+Calcula las métricas y las guarda en mlflow
+
+
+`flo.persist_model_to_mlflow(X_train, X_test, y_train, y_test, model, params, "Regresión lineal")`
 # Datos
 ## Source Data
 -Link de donde se han obtenido los datos de la boya: 

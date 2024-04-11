@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 RANDOM_STATE = 777
 
 '''
-devuelve X_train, X_test, y_train, y_test
+Devuelve X_train, X_test, y_train, y_test
 '''
 def separar_train_test():
     df = pd.read_parquet("../clean/df_definitivo.parquet")
