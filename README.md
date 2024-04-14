@@ -47,7 +47,10 @@ Preprocesamiento de datos, especificando los parámetros
 Inicializar programa
 
 `python main.py`
+## Uso de jupyter con el entorno virtual
+Para ejecutarlo desde el entorno virtual
 
+`python -m jupyter notebook`
 ## Uso de mlflow
 ### Levantamiento del servidor
 Los resultados se guardarán en el archivo mlruns.db
