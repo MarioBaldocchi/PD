@@ -1,3 +1,4 @@
+'''
 from sklearn.linear_model import LinearRegression
 from train_test_split import separar_train_test
 from ml_flow_utils import MLFlow
@@ -32,3 +33,5 @@ pipe = Pipeline([('scaler', scaler), ('lin', LinearRegression(**params))])
 pipe.fit(X_train, y_train)
 
 flo.persist_model_to_mlflow(X_train, X_test, y_train, y_test, pipe, params, "Regresión lineal con escalado")
+
+'''
