@@ -2,7 +2,7 @@ from sklearn.linear_model import LinearRegression
 from train_test_split import separar_train_test
 from ml_flow_utils import MLFlow
 
-flo = MLFlow("regression")
+flo = MLFlow("linear")
 
 X_train, X_test, y_train, y_test = separar_train_test()
 
