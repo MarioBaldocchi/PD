@@ -2,7 +2,6 @@ from sklearn.dummy import DummyRegressor
 from sklearn.model_selection import cross_validate
 
 from modelos import *
-from modelos.subsets_manager import *
 
 '''
 Modelo que solo devuelve la media del train
