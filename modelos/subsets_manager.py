@@ -29,11 +29,10 @@ def sep_train_test():
     return X[~filtro_test], X[filtro_test], y[~filtro_test], y[filtro_test]
 
 
-K = 5
-
 '''
 Devuelve:
 KFold con el numero de folds predeterminado con K
 '''
 def cv_folds():
+    K = 5
     return KFold(n_splits=K, shuffle=True, random_state=RANDOM_SEED)
