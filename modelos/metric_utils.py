@@ -16,6 +16,6 @@ def calcular_metricas_search(search, X_test, y_test):
     metricas = calcular_metricas(y_test, search.best_estimator_.predict(X_test))
     # metricas CV
     ind = search.best_index_
-    metricas["CV_TEST_RMSE"] = search.cv_results_["mean_test_score"][ind]
-    metricas["CV_TRAIN_RMSE"] = search.cv_results_["mean_train_score"][ind]
+    metricas["CV_TEST_RMSE"] = -1 * search.cv_results_["mean_test_score"][ind]
+    metricas["CV_TRAIN_RMSE"] = -1 * search.cv_results_["mean_train_score"][ind]
     return metricas
