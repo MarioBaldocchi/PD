@@ -19,3 +19,18 @@ def calcular_metricas_search(search, X_test, y_test):
     metricas["CV_TEST_RMSE"] = -1 * search.cv_results_["mean_test_score"][ind]
     metricas["CV_TRAIN_RMSE"] = -1 * search.cv_results_["mean_train_score"][ind]
     return metricas
+
+def calcular_metricas_search_escalando_y(search, X_test, y_test, scaler_y):
+
+    predicciones = search.best_estimator_.predict(X_test)
+    #Invertimos la escala de las predicciones
+    predicciones_best_model_2d = predicciones.reshape(-1, 1)
+    predicciones_2d = scaler_y.inverse_transform(predicciones_best_model_2d)
+
+    # metricas TEST
+    metricas = calcular_metricas(y_test, predicciones_2d)
+    # metricas CV
+    ind = search.best_index_
+    metricas["CV_TEST_RMSE"] = -1 * search.cv_results_["mean_test_score"][ind]
+    metricas["CV_TRAIN_RMSE"] = -1 * search.cv_results_["mean_train_score"][ind]
+    return metricas
