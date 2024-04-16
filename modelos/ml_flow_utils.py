@@ -7,13 +7,14 @@ from modelos import RANDOM_SEED
 Clase que se encarga de guardar el modelo con sus resultados a MLFlow
 '''
 class MLFlow:
-    def __init__(self, exp_title):
+    def __init__(self, exp_title = None):
         '''
         @param exp_title: nombre del experimento
         '''
         #mlflow.sklearn.autolog() - selecciona automaticamente las metricas a guardar
         mlflow.set_tracking_uri(uri="http://127.0.0.1:5000")
-        mlflow.set_experiment(exp_title)
+        if exp_title is not None:
+            mlflow.set_experiment(exp_title)
 
     def get_saved_model(self, model_name):
         return mlflow.pyfunc.load_model(f"models:/{model_name}/latest")
