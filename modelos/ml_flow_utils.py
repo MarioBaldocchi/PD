@@ -15,6 +15,8 @@ class MLFlow:
         mlflow.set_tracking_uri(uri="http://127.0.0.1:5000")
         mlflow.set_experiment(exp_title)
 
+    def get_saved_model(self, model_name):
+        return mlflow.pyfunc.load_model(f"models:/{model_name}/latest")
 
     def persist_model_to_mlflow(self, X_train, model, params, metrics, run_name, train_info=""):
         """
@@ -45,4 +47,5 @@ class MLFlow:
                 artifact_path="wave_height",
                 signature=signature,
                 input_example=X_train,
+                registered_model_name=run_name,
             )
