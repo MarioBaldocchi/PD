@@ -95,7 +95,7 @@ El preprocesamiento se divide en las siguientes etapas:
 ├── modelos (entrenamiento y evaluacion de modelos)
 │    ├── metrics_utils.py - ayuda a calcular las métricas de evalución
 │    ├── ml_flow_utils.py - ayuda a guardar el modelo en MLFLow o cargarlo de ahi
-│    ├── subsets_manager.py - clase encargada de separar los datos en subconjuntos train y test
+│    ├── subsets_manager.py - clase encargada de separar los datos en subconjuntos train, validacion y test
 │    ├── analisis.ipynb - notebook que analiza los datos para sacar conclusiones (antes entrenar los modelos)
 │    │
 │    ├── evaluacion (evaluacion de los modelos obtenidos)
