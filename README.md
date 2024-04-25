@@ -88,10 +88,24 @@ El preprocesamiento se divide en las siguientes etapas:
 
 # Estructura del proyecto
 
-```bash
+```
 ├── adquisicion (lógica de captura de la api/descarga de los datos del drive)
 ├── preprocess (lógica de preprocesado y limpieza de los datos)
-├── utils (herramientas de uso adicional)
 ├── metadata (descripción de los datos)
-├── exploracion
+├── modelos (entrenamiento y evaluacion de modelos)
+│    ├── metrics_utils.py - ayuda a calcular las métricas de evalución
+│    ├── ml_flow_utils.py - ayuda a guardar el modelo en MLFLow o cargarlo de ahi
+│    ├── subsets_manager.py - clase encargada de separar los datos en subconjuntos train y test
+│    ├── analisis.ipynb - notebook que analiza los datos para sacar conclusiones (antes entrenar los modelos)
+│    │
+│    ├── evaluacion (evaluacion de los modelos obtenidos)
+│    │
+│    │ (en las siguentes subcarpetas hay notebooks para entrenar los modelos asociados)
+│    ├── dummy (modelo que solo devuelve la media, sin importar el input)
+│    ├── lineal (entrenamiento de varios tipos de modelos lineales)
+│    ├── mlperceptron (entrenamiento del modelo de MLP (redes neuronales))
+│    └── random_forest (entrenamiento del modelo de random forest)
+│    
+├── utils (herramientas de uso adicional)
+└── exploracion
 ```
