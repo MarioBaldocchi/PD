@@ -1,7 +1,7 @@
 '''
 Clase encargada de separar los datos en:
 - Test (datos de 2023)
-- Train (datos de 2022)
+- Train (el resto)
     - K folds (para validación)
 '''
 import pandas as pd
