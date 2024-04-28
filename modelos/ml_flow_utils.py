@@ -17,7 +17,7 @@ class MLFlow:
             mlflow.set_experiment(exp_title)
 
     def get_saved_model(self, model_name):
-        return mlflow.pyfunc.load_model(f"models:/{model_name}/latest")
+        return mlflow.sklearn.load_model(f"models:/{model_name}/latest")
 
     def persist_model_to_mlflow(self, X_train, model, params, metrics, run_name, train_info=""):
         """
