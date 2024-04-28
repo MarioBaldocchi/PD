@@ -99,6 +99,13 @@ El preprocesamiento se divide en las siguientes etapas:
 │    ├── analisis.ipynb - notebook que analiza los datos para sacar conclusiones (antes entrenar los modelos)
 │    │
 │    ├── evaluacion (evaluacion de los modelos obtenidos)
+│    │    ├── runs (guarda las ejecuciones exportadas de mlflow para evaluar de forma mas facil los modelos)
+│    │    │
+│    │    ├── evaluacion-lineales.ipynb (evaluacion de los modelos lineales)
+│    │    ├── evaluacion-forest.ipynb (evaluacion de los modelos que usan random forest)
+│    │    ├── evaluacion-mlp.ipynb (evaluacion de los modelos de MLP)
+│    │    │
+│    │    └── evaluacion-best.ipynb (eligiendo el mejor modelo)
 │    │
 │    │ (en las siguentes subcarpetas hay notebooks para entrenar los modelos asociados)
 │    ├── dummy (modelo que solo devuelve la media, sin importar el input)
