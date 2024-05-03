@@ -92,6 +92,15 @@ El preprocesamiento se divide en las siguientes etapas:
 ├── adquisicion (lógica de captura de la api/descarga de los datos del drive)
 ├── preprocess (lógica de preprocesado y limpieza de los datos)
 ├── metadata (descripción de los datos)
+├── forecasts-preprocess (preprocesado de los datos de predicciones(NO reales), 
+│    │                   usado para posteriormente evaluar el modelo en condiciones de producción)
+│    ├── preprocess_forecast_primaria.ipynb - preprocesamiento de datos para la fuente primaria
+│    ├── preprocess_forecast_secundaria.ipynb - preprocesamiento de datos para la fuente secundaria
+│    ├── primaria-raw - continene los archivos de predicciones de fuente primaria
+│    │                cuyo nombre representa la fecha y hora(sin minutos) en la que se hizo la predicción, ej 13h_03_05_2024.csv
+│    └── secundaria-raw - continene los archivos de predicciones de fuente secundaria
+│                     cuyo nombre representa la fecha y hora(sin minutos) en la que se hizo la predicción, ej 13h_03_05_2024.csv
+│
 ├── modelos (entrenamiento y evaluacion de modelos)
 │    ├── modelo_definitivo - carpeta que guarda el modelo definitivo en el formato pickle, que se usará en producción
 │    ├── metrics_utils.py - ayuda a calcular las métricas de evalución
