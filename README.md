@@ -5,6 +5,7 @@
 * [Misión](#misión)
 * [Installación y Setup](#installación-y-setup)
 * [Datos](#datos)
+* [Evaluación sobre predicciones](#evaluación-sobre-predicciones)
 ### Misión
 Nuestra principal misión es realizar predicciones de las alturas de las olas en la playa de Tramore (Irlanda) para mejorar la experiencia de los surfistas.
 Para ello, nos apoyamos en distintas fuentes como páginas web climatológicas y oceanográficas.
@@ -85,6 +86,13 @@ El preprocesamiento se divide en las siguientes etapas:
 - **Eliminación de columnas irrelevantes**: Se eliminan todas aquellas variables que toman un único valor o tienen todo nulos.
 - **Tratamiento de nulos**: En cuanto a nuestra fuente principal, los nulos realemte representas 0´s, por lo que simplemente reemplazamos todos lo nulos por 0. Sin embargo, hay nulos ocultos, que vienen representados por guiones (-). Al haber pocas observaciones con nulos, decidimos eliminarlas. Referente a la fuente secundaria, tan sólo hay dos variables con muchos nulos: `gus`´ y `wdir`. Decidimos eliminar dichas variables puesto que si optamos por eliminar las observaciones que contienen algún nulo, nuestra base de datos se reduciría más de un 80%. La imputación hemos decidido descartarlas por la gran cantidad de nulos presentes en dichas variables. Una vez quitadas las variables, nos quedan 17 nulos concentrados el 1 de febrero de 2022, suponemos que se debe a un mal funcionamiento de los aparatos de medición. En este caso, eliminamos las observaciones con algún nulo.
 - **Tratamiento de nulos**
+
+## Evaluación sobre predicciones
+Dado que nos basaremos en predicciones de otros datos para predecir la altura de la ola,
+para evaluar el rendimiento del sistema de forma más aproximada a la situación real posible
+hemos recolectado predicciones de diferentes días/horas que se guardan en la carpeta forecasts-preprocess.
+Con el código de  preprocesado en esa misma carpeta sacamos la antelación de las predicciones
+para posteriormente evaluar el rendimiento en función de la antelación.
 
 # Estructura del proyecto
 
