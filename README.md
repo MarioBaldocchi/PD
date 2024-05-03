@@ -93,6 +93,7 @@ El preprocesamiento se divide en las siguientes etapas:
 ├── preprocess (lógica de preprocesado y limpieza de los datos)
 ├── metadata (descripción de los datos)
 ├── modelos (entrenamiento y evaluacion de modelos)
+│    ├── modelo_definitivo - carpeta que guarda el modelo definitivo en el formato pickle, que se usará en producción
 │    ├── metrics_utils.py - ayuda a calcular las métricas de evalución
 │    ├── ml_flow_utils.py - ayuda a guardar el modelo en MLFLow o cargarlo de ahi
 │    ├── subsets_manager.py - clase encargada de separar los datos en subconjuntos train, validacion y test
