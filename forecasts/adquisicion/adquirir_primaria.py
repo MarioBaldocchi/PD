@@ -16,12 +16,11 @@ def forecast_primaria_raw():
         delay = 5 # seconds
         myElem = WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.ID, 'tabid_0_content_div')))
         # sacamos la tabla de predicciones
-        #dfs = pd.read_html(myElem.find_element(By.CLASS_NAME, "tabulka").get_attribute('outerHTML'))
         dfs = pd.read_html(myElem.get_attribute('innerHTML'))
         df = dfs[0] # primera tabla es la que necesitamos
 
         # para guardar correctamente el nombre de las columnas, no los indices
-        df.columns = df.iloc[0]
+        df.columns = df.iloc[0].str.replace(' ', '') # eliminamos espacios en blanco
         df.drop(df.index[0], inplace=True)
 
         # solo nos quedamos con las mediciones necesarias (filtramos filas)
