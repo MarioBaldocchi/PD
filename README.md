@@ -100,8 +100,7 @@ para posteriormente evaluar el rendimiento en función de la antelación.
 ├── adquisicion (lógica de captura de la api/descarga de los datos del drive)
 ├── preprocess (lógica de preprocesado y limpieza de los datos)
 ├── metadata (descripción de los datos)
-├── forecasts-preprocess (preprocesado de los datos de predicciones(NO reales), 
-│    │                   usado para posteriormente evaluar el modelo en condiciones de producción)
+├── forecasts (aduisicion, almacenamiento y preprocesado de los datos de predicciones(NO reales))
 │    ├── preprocess_forecast_primaria.ipynb - preprocesamiento de datos para la fuente primaria
 │    ├── preprocess_forecast_secundaria.ipynb - preprocesamiento de datos para la fuente secundaria
 │    ├── primaria-raw - continene los archivos de predicciones de fuente primaria
