@@ -19,9 +19,23 @@ def forecast_primaria_raw():
         #dfs = pd.read_html(myElem.find_element(By.CLASS_NAME, "tabulka").get_attribute('outerHTML'))
         dfs = pd.read_html(myElem.get_attribute('innerHTML'))
         df = dfs[0] # primera tabla es la que necesitamos
+
         # para guardar correctamente el nombre de las columnas, no los indices
         df.columns = df.iloc[0]
         df.drop(df.index[0], inplace=True)
+
+        # solo nos quedamos con las mediciones necesarias (filtramos filas)
+        df = df[[True, False, False, True, True, False, True, True, True, False, False]]
+        df.reset_index(drop=True, inplace=True)
+
+        # los datos de nubosidad es una fila con varias filas(low/mid/high), hacemos la media para quedarnos con un valor
+        htmlClouds = myElem.find_element(By.ID, 'tabid_0_0_CDC').get_attribute('outerHTML')
+        htmlClouds = htmlClouds.replace('tr', 'table')
+        htmlClouds = htmlClouds.replace('td', 'tr')
+        htmlClouds = htmlClouds.replace('div', 'td')
+        clouds = pd.read_html(htmlClouds)[0]
+        # reemplazamos nubosidad con la media de los tres
+        df.iloc[4, :] = ((clouds[0] + clouds[1] + clouds[2]) // 3).fillna(0).astype('int')
     finally:
         # cerramos sesion
         browser.close()
