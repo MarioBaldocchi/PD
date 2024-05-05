@@ -43,4 +43,4 @@ def forecasts_clean_merged():
     return df_def
 
 
-forecasts_clean_merged().to_csv('./clean/forecast_merged_test.csv', index=False)
+forecasts_clean_merged().to_csv('./clean/forecast_merged.csv', index=False)
