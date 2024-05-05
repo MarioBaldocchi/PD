@@ -1,5 +1,5 @@
 # #### Archivo de preprocesamiento de datos de la boya (fuente principal)
-
+import numpy as np
 # Importamos librerías necesarias
 
 import pandas as pd
@@ -35,6 +35,9 @@ def preprocess_df(df, fecha_pred):
     # transponemos la matriz
     df = df.T
     df.columns = ['Vviento', 'AlturaOlas', 'PeriodoOlas', 'Temperatura', 'Nubosidad', 'Lluvia']
+
+    # Con estos valores se asignan ceros en la variable Lluvia
+    df.replace('\xa0', 0, inplace=True)
     df['fecha'] = df.index.map(lambda x: sacar_fecha_target(x, fecha_pred))
     # nos quedamos con predicciones (descartamos pasado)
     df = df[df['fecha'] >= fecha_pred]
