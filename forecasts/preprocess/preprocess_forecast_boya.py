@@ -48,7 +48,7 @@ def preprocess_df(df, fecha_pred):
     df['anio'] = df.fecha.dt.year
     df['mes'] = df.fecha.dt.month
 
-    df = df.drop(columns='fecha')
+    df = df.drop(columns=['fecha', 'AlturaOlas'])
     df = df.reset_index(drop=True)
     # no hay na's al ser predicciones
     #df = df.fillna(0)
