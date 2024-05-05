@@ -73,7 +73,7 @@ for file in os.listdir(directory):
         fecha = datetime.strptime(filename.replace('h', ''), '%H_%d_%m_%Y.csv')
         df = pd.read_csv(dirName + "/" + filename)
         df = preprocess_df(df, fecha)
-        df['filename'] = filename
+        #df['filename'] = filename
         dfs.append(df)
 
 
@@ -85,5 +85,5 @@ if not os.path.exists(outDir):
 # Guardamos el dataframe concatenando todos los archivos en uno
 
 # juntamos los df's y los guardamos
-pd.concat(dfs).to_csv(outDir+'/forecast_principal.csv', index=False)
+pd.concat(dfs).to_csv(outDir+'/forecast_boya.csv', index=False)
 

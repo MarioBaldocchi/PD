@@ -41,7 +41,7 @@ for file in os.listdir(directory):
     filename = os.fsdecode(file)
     if filename.endswith(".json"):
         df = preprocess(pd.read_json(dirName + "/" + filename), datetime.strptime(filename.replace('h', ''), '%H_%d_%m_%Y.json').replace(tzinfo=timezone.utc))
-    dfs.append(df)
+        dfs.append(df)
 
 
 # Creamos directorio de salida si no existe
@@ -50,6 +50,6 @@ if not os.path.exists(outDir):
     os.makedirs(outDir)
 
 # Guardamos el dataframe concatenando todos los archivos en uno
-pd.concat(dfs).to_csv(outDir+'/forecast_secundaria.csv', index=False)
+pd.concat(dfs).to_csv(outDir+'/forecast_meteo.csv', index=False)
 
 
