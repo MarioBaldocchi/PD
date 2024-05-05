@@ -88,11 +88,23 @@ El preprocesamiento se divide en las siguientes etapas:
 - **Tratamiento de nulos**
 
 ## Evaluación sobre predicciones
+Con predicciones nos referimos a predicciones
+(llamado forecast en el repositorio para evitar ambiguedad)
+que hacen otras compañias para datos que no sea la altura de las olas.
+
 Dado que nos basaremos en predicciones de otros datos para predecir la altura de la ola,
 para evaluar el rendimiento del sistema de forma más aproximada a la situación real posible
-hemos recolectado predicciones de diferentes días/horas que se guardan en la carpeta forecasts-preprocess.
-Con el código de  preprocesado en esa misma carpeta sacamos la antelación de las predicciones
+hemos implementando un sistema de recoleccion (la carpeta forecasts/adquisicion) de predicciones de diferentes días/horas que se guardan en las carpetas forecasts/*-raw.
+
+Con el código de  preprocesado en esa misma carpeta (forecasts/preprocess) sacamos la antelación de las predicciones
 para posteriormente evaluar el rendimiento en función de la antelación.
+
+Por último, tenemos el archivo forecasts_clean_data.py que se
+encarga de conseguir el dataframe limpio que junta las fuentes diferentes (merge)
+para poder "alimentar" estos datos al modelo ya.
+
+La evaluación se hace con la monitorización de la deriva en el notebook forecasts/monitorizacion.ipynb para las variables explicativas.
+Mientras que las predicciones segùn cada antelación se evaluan en forecasts/evaluacion.ipynb
 
 # Estructura del proyecto
 
@@ -101,13 +113,18 @@ para posteriormente evaluar el rendimiento en función de la antelación.
 ├── preprocess (lógica de preprocesado y limpieza de los datos)
 ├── metadata (descripción de los datos)
 ├── forecasts (aduisicion, almacenamiento y preprocesado de los datos de predicciones(NO reales))
+│    ├── evaluacion.ipynb - evaluacion de los fallos segùn la antelación
+│    ├── monitorizacion.ipynb - evaluación de los cambios entre los conjuntos de observaciones y forecasts
+│    ├── forecasts_clean_data.py - guarda el dataframe uniendo
+│    │       predicciones de diferentes fuentes (sirven ya como input del modelo)
+│    ├── clean - datos preprocesados
 │    ├── preprocess - preprocesamiento de datos de predicciones
 │    ├── adquisicion - adquisicion de los datos de predicciones
-│    ├── primaria-raw - continene los archivos de predicciones de fuente primaria
+│    ├── boya-raw - continene los archivos de predicciones de datos de la boya
 │    │                cuyo nombre representa la fecha y hora(sin minutos) en la que se hizo la predicción, ej 13h_03_05_2024.csv
-│    ├── terciaria-raw - continene los archivos de predicciones de fuente terciaria
+│    ├── luna-raw - continene los archivos de predicciones de la fase lunar
 │    │                cuyo nombre representa la fecha en la que se hizo la predicción, ej 03_05_2024.json
-│    └── secundaria-raw - continene los archivos de predicciones de fuente secundaria
+│    └── meteo-raw - continene los archivos de predicciones de datos meteorologicos adicionales
 │                     cuyo nombre representa la fecha y hora(sin minutos) en la que se hizo la predicción, ej 13h_03_05_2024.json
 │
 ├── modelos (entrenamiento y evaluacion de modelos)

@@ -58,7 +58,7 @@ def preprocess(data, fecha_pred):
     return data
 
 dfs = []
-dirName = '../secundaria-raw'
+dirName = '../meteo-raw'
 directory = os.fsencode(dirName)
 for file in os.listdir(directory):
     filename = os.fsdecode(file)

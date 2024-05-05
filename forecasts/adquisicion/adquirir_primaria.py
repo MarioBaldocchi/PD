@@ -45,4 +45,4 @@ def forecast_primaria_raw():
 # sacamos la fecha actual
 now = datetime.now()
 df = forecast_primaria_raw()
-df.to_csv('../primaria-raw/' + now.strftime('%Hh_%d_%m_%Y.csv'), index=False)
+df.to_csv('../boya-raw/' + now.strftime('%Hh_%d_%m_%Y.csv'), index=False)

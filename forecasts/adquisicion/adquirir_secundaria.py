@@ -21,4 +21,4 @@ df = forecast_secundaria_raw()
 # sacamos la fecha actual
 now = datetime.now()
 # guardamos el dato sacado con la fecha en el nombre del archivo
-df.to_json('../secundaria-raw/' + now.strftime('%Hh_%d_%m_%Y.json'), index=False)
+df.to_json('../meteo-raw/' + now.strftime('%Hh_%d_%m_%Y.json'), index=False)

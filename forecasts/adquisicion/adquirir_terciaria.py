@@ -24,4 +24,4 @@ toDate = datetime.strptime('02/06/2024', "%d/%m/%Y")
 # sacamos predicciones
 df = forecast_terciaria_raw(fromDate.strftime('%Y-%m-%d'), toDate.strftime('%Y-%m-%d'))
 # guardamos el dato sacado con la fecha en el nombre del archivo
-df.to_json('../terciaria-raw/' + fromDate.strftime('%d_%m_%Y.json'), index=False)
+df.to_json('../luna-raw/' + fromDate.strftime('%d_%m_%Y.json'), index=False)

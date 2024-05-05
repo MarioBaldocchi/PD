@@ -17,6 +17,8 @@ def forecasts_clean_merged():
     df_def = cambiar_tipo('int', ['Vviento', 'PeriodoOlas', 'Temperatura', 'Nubosidad'], df_def)
     df_def = cambiar_tipo('float', ['AlturaOlas', 'Lluvia'], df_def)
 
+    df_def.drop(columns='Temperatura', inplace=True) # sale duplicada, la eliminamos
+
     return df_def
 
 

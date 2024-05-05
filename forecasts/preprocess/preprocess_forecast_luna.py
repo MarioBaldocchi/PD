@@ -13,7 +13,7 @@ def preprocess_lunar(df):
     return df
 
 dfs = []
-dirName = '../terciaria-raw'
+dirName = '../luna-raw'
 directory = os.fsencode(dirName)
 for file in os.listdir(directory):
     filename = os.fsdecode(file)
