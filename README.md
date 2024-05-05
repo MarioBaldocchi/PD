@@ -101,12 +101,14 @@ para posteriormente evaluar el rendimiento en función de la antelación.
 ├── preprocess (lógica de preprocesado y limpieza de los datos)
 ├── metadata (descripción de los datos)
 ├── forecasts (aduisicion, almacenamiento y preprocesado de los datos de predicciones(NO reales))
-│    ├── preprocess_forecast_primaria.ipynb - preprocesamiento de datos para la fuente primaria
-│    ├── preprocess_forecast_secundaria.ipynb - preprocesamiento de datos para la fuente secundaria
+│    ├── preprocess - preprocesamiento de datos de predicciones
+│    ├── adquisicion - adquisicion de los datos de predicciones
 │    ├── primaria-raw - continene los archivos de predicciones de fuente primaria
 │    │                cuyo nombre representa la fecha y hora(sin minutos) en la que se hizo la predicción, ej 13h_03_05_2024.csv
+│    ├── terciaria-raw - continene los archivos de predicciones de fuente terciaria
+│    │                cuyo nombre representa la fecha en la que se hizo la predicción, ej 03_05_2024.json
 │    └── secundaria-raw - continene los archivos de predicciones de fuente secundaria
-│                     cuyo nombre representa la fecha y hora(sin minutos) en la que se hizo la predicción, ej 13h_03_05_2024.csv
+│                     cuyo nombre representa la fecha y hora(sin minutos) en la que se hizo la predicción, ej 13h_03_05_2024.json
 │
 ├── modelos (entrenamiento y evaluacion de modelos)
 │    ├── modelo_definitivo - carpeta que guarda el modelo definitivo en el formato pickle, que se usará en producción

@@ -1,5 +1,4 @@
 # #### Archivo de preprocesamiento de datos de la boya (fuente principal)
-# (VERSION EJECUTABLE DEL NOTEBOOK)
 
 # Importamos librerías necesarias
 
