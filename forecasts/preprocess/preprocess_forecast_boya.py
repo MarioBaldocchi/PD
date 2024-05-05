@@ -63,23 +63,25 @@ def preprocess_df(df, fecha_pred):
 # - 03 - dia
 # - 05 - mes
 # - 2024 - anio
+def forecast_boya_clean():
+    dirName = 'boya-raw'
+    directory = os.fsencode(dirName)
+    dfs = []
+    # recorremos todos los datos sacados y los guardamos de forma preprocesada
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        if filename.endswith(".csv"):
+            # sacamos los datos de fecha en la que se guardaron las predicciones
+            # para poder calcular con cuanta antelación (en horas) se hizo la predicción
+            fecha = datetime.strptime(filename.replace('h', ''), '%H_%d_%m_%Y.csv')
+            df = pd.read_csv(dirName + "/" + filename)
+            df = preprocess_df(df, fecha)
+            #df['filename'] = filename
+            dfs.append(df)
 
-dirName = '../boya-raw'
-directory = os.fsencode(dirName)
-dfs = []
-# recorremos todos los datos sacados y los guardamos de forma preprocesada
-for file in os.listdir(directory):
-    filename = os.fsdecode(file)
-    if filename.endswith(".csv"):
-        # sacamos los datos de fecha en la que se guardaron las predicciones
-        # para poder calcular con cuanta antelación (en horas) se hizo la predicción
-        fecha = datetime.strptime(filename.replace('h', ''), '%H_%d_%m_%Y.csv')
-        df = pd.read_csv(dirName + "/" + filename)
-        df = preprocess_df(df, fecha)
-        #df['filename'] = filename
-        dfs.append(df)
+    return pd.concat(dfs)
 
-
+'''
 # Creamos directorio de salida si no existe
 outDir = '../clean'
 if not os.path.exists(outDir):
@@ -88,5 +90,5 @@ if not os.path.exists(outDir):
 # Guardamos el dataframe concatenando todos los archivos en uno
 
 # juntamos los df's y los guardamos
-pd.concat(dfs).to_csv(outDir+'/forecast_boya.csv', index=False)
-
+forecast_boya_clean().to_csv(outDir+'/forecast_boya.csv', index=False)
+'''

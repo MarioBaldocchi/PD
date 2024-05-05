@@ -57,26 +57,28 @@ def preprocess(data, fecha_pred):
     data = preprocess_wdir(data)
     return data
 
-dfs = []
-dirName = '../meteo-raw'
-directory = os.fsencode(dirName)
-for file in os.listdir(directory):
-    filename = os.fsdecode(file)
-    if filename.endswith(".json"):
-        # pasamos a timezone utc
-        datetime = datetime.strptime(filename.replace('h', ''), '%H_%d_%m_%Y.json') + timedelta(hours=-1)
-        df = preprocess(pd.read_json(dirName + "/" + filename), datetime.replace(tzinfo=timezone.utc))
-        dfs.append(df)
+def forecast_meteo_clean():
+    dfs = []
+    dirName = 'meteo-raw'
+    directory = os.fsencode(dirName)
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        if filename.endswith(".json"):
+            # pasamos a timezone utc
+            datetm = datetime.strptime(filename.replace('h', ''), '%H_%d_%m_%Y.json') + timedelta(hours=-1)
+            df = preprocess(pd.read_json(dirName + "/" + filename), datetm.replace(tzinfo=timezone.utc))
+            dfs.append(df)
+    return pd.concat(dfs)
 
-
+'''
 # Creamos directorio de salida si no existe
 outDir = '../clean'
 if not os.path.exists(outDir):
     os.makedirs(outDir)
 
 # Guardamos el dataframe concatenando todos los archivos en uno
-pd.concat(dfs).to_csv(outDir+'/forecast_meteo.csv', index=False)
-
+forecast_meteo_clean().to_csv(outDir+'/forecast_meteo.csv', index=False)
+'''
 
 
 

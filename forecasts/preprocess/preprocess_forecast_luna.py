@@ -12,26 +12,28 @@ def preprocess_lunar(df):
     df = df.drop(columns=["datetime"])
     return df
 
-dfs = []
-dirName = '../luna-raw'
-directory = os.fsencode(dirName)
-for file in os.listdir(directory):
-    filename = os.fsdecode(file)
-    if filename.endswith(".json"):
-        df = preprocess_lunar(pd.read_json(dirName + "/" + filename))
-        dfs.append(df)
+def forecast_lunar_clean():
+    dfs = []
+    dirName = 'luna-raw'
+    directory = os.fsencode(dirName)
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        if filename.endswith(".json"):
+            df = preprocess_lunar(pd.read_json(dirName + "/" + filename))
+            dfs.append(df)
+    # Guardamos el dataframe concatenando todos los archivos en uno
+    df = pd.concat(dfs)
+    # por si se repiten filas
+    df.drop_duplicates(inplace=True)
+    return df
 
-
+'''
 # Creamos directorio de salida si no existe
 outDir = '../clean'
 if not os.path.exists(outDir):
     os.makedirs(outDir)
 
-# Guardamos el dataframe concatenando todos los archivos en uno
-df = pd.concat(dfs)
-# por si se repiten filas
-df.drop_duplicates(inplace=True)
-
-df.to_csv(outDir+'/forecast_luna.csv', index=False)
+forecast_lunar_clean().to_csv(outDir+'/forecast_luna.csv', index=False)
+'''
 
 
