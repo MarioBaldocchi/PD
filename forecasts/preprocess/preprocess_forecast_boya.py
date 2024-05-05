@@ -42,7 +42,7 @@ def preprocess_df(df, fecha_pred):
     # nos quedamos con predicciones (descartamos pasado)
     df = df[df['fecha'] >= fecha_pred]
     # calculamos antelacion (en horas)
-    df['antelacion'] = (pd.to_datetime(df['fecha']) - fecha_pred).dt.total_seconds() // 3600
+    df['antelacion'] = ((pd.to_datetime(df['fecha']) - fecha_pred).dt.total_seconds() // 3600).astype('int')
     df['hora'] = df.fecha.dt.hour
     df['dia'] = df.fecha.dt.day
     df['anio'] = df.fecha.dt.year

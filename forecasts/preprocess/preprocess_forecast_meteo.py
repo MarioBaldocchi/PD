@@ -3,7 +3,7 @@
 
 # Importamos librerías necesarias
 import pandas as pd
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import os
 
 def descomponer_fecha(df):
@@ -52,7 +52,7 @@ def preprocess_wdir(df):
 
 def preprocess(data, fecha_pred):
     data = descomponer_fecha(data)
-    data['antelacion'] = (pd.to_datetime(data['fecha']) - fecha_pred).dt.total_seconds() // 3600
+    data['antelacion'] = ((pd.to_datetime(data['fecha']) - fecha_pred).dt.total_seconds() // 3600).astype('int')
     data = obtener_columnas_relevantes(data)
     data = preprocess_wdir(data)
     return data
@@ -63,7 +63,9 @@ directory = os.fsencode(dirName)
 for file in os.listdir(directory):
     filename = os.fsdecode(file)
     if filename.endswith(".json"):
-        df = preprocess(pd.read_json(dirName + "/" + filename), datetime.strptime(filename.replace('h', ''), '%H_%d_%m_%Y.json').replace(tzinfo=timezone.utc))
+        # pasamos a timezone utc
+        datetime = datetime.strptime(filename.replace('h', ''), '%H_%d_%m_%Y.json') + timedelta(hours=-1)
+        df = preprocess(pd.read_json(dirName + "/" + filename), datetime.replace(tzinfo=timezone.utc))
         dfs.append(df)
 
 
