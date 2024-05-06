@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 
 from forecasts.capturar_altura_olas import caturar_altura_olas
@@ -42,5 +44,7 @@ def forecasts_clean_merged():
 
     return df_def
 
-
-forecasts_clean_merged().to_csv('./clean/forecast_merged.csv', index=False)
+outDir = 'clean'
+if not os.path.exists(outDir):
+    os.makedirs(outDir)
+forecasts_clean_merged().to_csv(outDir + '/forecast_merged.csv', index=False)
