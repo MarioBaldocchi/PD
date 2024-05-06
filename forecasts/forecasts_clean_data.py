@@ -2,10 +2,20 @@ import os
 
 import pandas as pd
 
+'''
+Depende de la ruta donde se ejecuta el .py
+
 from forecasts.capturar_altura_olas import caturar_altura_olas
 from forecasts.preprocess.preprocess_forecast_boya import forecast_boya_clean
 from forecasts.preprocess.preprocess_forecast_luna import forecast_lunar_clean
 from forecasts.preprocess.preprocess_forecast_meteo import forecast_meteo_clean
+'''
+
+#Si se ejecuta desde PD\forecasts>
+from capturar_altura_olas import caturar_altura_olas
+from preprocess.preprocess_forecast_boya import forecast_boya_clean
+from preprocess.preprocess_forecast_luna import forecast_lunar_clean
+from preprocess.preprocess_forecast_meteo import forecast_meteo_clean
 
 
 def cambiar_tipo(tipo, columnas, df):
