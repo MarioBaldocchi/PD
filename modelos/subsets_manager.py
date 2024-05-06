@@ -6,6 +6,8 @@ Clase encargada de separar los datos en:
 '''
 import pandas as pd
 from sklearn.model_selection import KFold
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import StandardScaler
 from modelos import RANDOM_SEED
 
 '''
@@ -28,6 +30,21 @@ def sep_train_test():
     filtro_test = (X.anio == 2023)
     return X[~filtro_test], X[filtro_test], y[~filtro_test], y[filtro_test]
 
+'''
+Devuelve el scaler
+'''
+def scaler():
+    X_train, X_test, y_train, y_test = sep_train_test()
+    scaler = ColumnTransformer(
+        transformers=[
+            # no escalonamos las dummy de dirección de viento
+            ("num", StandardScaler(), [c for c in X_train.columns if not c.startswith('wdir_')]),
+        ],
+        remainder='passthrough'
+    )
+    scaler.fit(X_train)
+
+    return scaler
 
 '''
 Devuelve:
