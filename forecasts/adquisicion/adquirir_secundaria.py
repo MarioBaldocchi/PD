@@ -1,6 +1,8 @@
 import requests
 import pandas as pd
 from datetime import datetime
+import time
+
 '''
 Saca las predicciones actuales de la fuente secundaria y los guarda en el formato del archivo json
 '''
@@ -16,9 +18,11 @@ def forecast_secundaria_raw():
     tablaWeather = requests.get(url, params=datos).json()
     return pd.DataFrame.from_dict(tablaWeather)
 
-# sacamos predicciones
-df = forecast_secundaria_raw()
-# sacamos la fecha actual
-now = datetime.now()
-# guardamos el dato sacado con la fecha en el nombre del archivo
-df.to_json('../meteo-raw/' + now.strftime('%Hh_%d_%m_%Y.json'), index=False)
+while True:
+    # sacamos predicciones
+    df = forecast_secundaria_raw()
+    # sacamos la fecha actual
+    now = datetime.now()
+    # guardamos el dato sacado con la fecha en el nombre del archivo
+    df.to_json('../meteo-raw/' + now.strftime('%Hh_%d_%m_%Y.json'), index=False)
+    time.sleep(3600)

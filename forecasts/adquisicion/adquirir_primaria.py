@@ -1,3 +1,5 @@
+import time
+
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -42,7 +44,11 @@ def forecast_primaria_raw():
     return df
 
 
-# sacamos la fecha actual
-now = datetime.now()
-df = forecast_primaria_raw()
-df.to_csv('../boya-raw/' + now.strftime('%Hh_%d_%m_%Y.csv'), index=False)
+
+
+while True:
+    # sacamos la fecha actual
+    now = datetime.now()
+    df = forecast_primaria_raw()
+    df.to_csv('../boya-raw/' + now.strftime('%Hh_%d_%m_%Y.csv'), index=False)
+    time.sleep(3600)
