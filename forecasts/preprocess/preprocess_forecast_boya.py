@@ -64,7 +64,7 @@ def preprocess_df(df, fecha_pred):
 # - 05 - mes
 # - 2024 - anio
 def forecast_boya_clean():
-    dirName = 'boya-raw'
+    dirName = './forecasts/boya-raw'
     directory = os.fsencode(dirName)
     dfs = []
     # recorremos todos los datos sacados y los guardamos de forma preprocesada

@@ -59,7 +59,7 @@ def preprocess(data, fecha_pred):
 
 def forecast_meteo_clean():
     dfs = []
-    dirName = 'meteo-raw'
+    dirName = './forecasts/meteo-raw'
     directory = os.fsencode(dirName)
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
