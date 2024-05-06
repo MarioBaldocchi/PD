@@ -14,7 +14,7 @@ def preprocess_lunar(df):
 
 def forecast_lunar_clean():
     dfs = []
-    dirName = 'luna-raw'
+    dirName = './forecasts/luna-raw'
     directory = os.fsencode(dirName)
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
