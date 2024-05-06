@@ -33,7 +33,7 @@ def sep_train_test():
 '''
 Devuelve el scaler
 '''
-def scaler():
+def get_scaler():
     X_train, X_test, y_train, y_test = sep_train_test()
     scaler = ColumnTransformer(
         transformers=[
