@@ -37,8 +37,8 @@ def forecasts_clean_merged():
     first_day = df_def.iloc[0]
     last_day = df_def.iloc[-1]
 
-    # Hacemos merge para sacar la altura de la olas real para una fecha determinada
-    df_def = df_def.merge(caturar_altura_olas(first_day, last_day), on=['anio', 'mes', 'dia', 'hora'])
+    # left join, si no ha llegado el día, le asignamos NA a la altura de la ola
+    df_def = df_def.merge(caturar_altura_olas(first_day, last_day), how='left', on=['anio', 'mes', 'dia', 'hora'])
 
     return df_def
 
