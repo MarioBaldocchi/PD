@@ -9,7 +9,7 @@ def preprocess_boya(df):
     df.reset_index(inplace=True)
     df.rename(columns={"index": 'fecha'}, inplace=True)
     df.fecha = pd.to_datetime(df.fecha, format='%d.%m.%Y')
-    df = quitar_columnas_innecesarias(df)
+    #df = quitar_columnas_innecesarias(df)
     # Los na representan 0's, por lo que los tratamos
     df = tratar_na(df)
     # En cambio los guiones representan datos no evaluados. Por tanto tenemos que eliminar las filas que contengan guiones

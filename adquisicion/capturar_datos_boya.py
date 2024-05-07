@@ -28,7 +28,7 @@ def boya_set_columns(tableWaves):
 '''
 Saca datos historicos de la boya
 '''
-def caturar_altura_olas(first_date, last_date):
+def caturar_datos_boya(first_date, last_date):
     # first_date y last_date en formato 2024-02-07 (%Y-%m-%d)
     url = 'https://www.windguru.cz/ajax/ajax_archive.php'
 

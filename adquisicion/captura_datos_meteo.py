@@ -3,9 +3,10 @@ import datetime
 import pandas as pd
 
 def extraccion_df_meteo(fechaIni, fechaFin):
-    """fechaIni y fechaFin son fechas en formato datetime de python"""
+    # fechaIni y fechaFin en formato 2024-02-07 (%Y-%m-%d)
     result = None
-
+    fechaIni = stringToDatetime(fechaIni)
+    fechaFin = stringToDatetime(fechaFin)
     # realizaremos consultas a la api de la forma extraccion_meteo_api(fechaInf, fechaSup)
     fechaSup = fechaFin
     fechaInf = subtract30Days(fechaSup)
@@ -51,6 +52,6 @@ def stringToDatetime(string):
     return datetime.datetime.strptime(string, "%Y-%m-%d")
 
 '''
-df = extraccion_df_meteo(stringToDatetime('2024-01-01'), stringToDatetime('2024-05-07'))
+df = extraccion_df_meteo('2024-01-01', '2024-05-07')
 df.to_parquet('../raw/fuente_secundaria.parquet')
 '''
