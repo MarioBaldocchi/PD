@@ -10,7 +10,7 @@ def preprocess_meteo(df):
     df = descomponerTiempoUnix(df).sort_values(['anio', 'mes', 'dia'], ascending=[True, True, True])
     """TRANSFORMACIÓN DE LOS DATOS"""
     # Quitamos las columnas que solo tomen un valor (no aportan información relevante para las predicciones)
-    df = quitar_columnas_innecesarias(df)
+    #df = quitar_columnas_innecesarias(df)
     # Columnas descartadas manualmente
     df = quitar_columnas_manual(df)
     # Convertimos wdir a variables dummy
@@ -53,6 +53,15 @@ def quitar_columnas_manual(df):
             """
     df.drop(columns=["day_ind", "wx_icon", "icon_extd", "gust", "wdir", "clds", "wx_phrase", "uv_desc"],
             inplace=True)
+
+    # quitamos columns irrelevantes que solo toman 1 valor
+    df.drop(columns=['key', 'class', 'obs_id', 'obs_name', 'pressure_tend', 'pressure_desc',
+       'max_temp', 'min_temp', 'precip_total', 'precip_hrly', 'snow_hrly',
+       'qualifier', 'qualifier_svrty', 'blunt_phrase', 'terse_phrase',
+       'water_temp', 'primary_wave_period', 'primary_wave_height',
+       'primary_swell_period', 'primary_swell_height',
+       'primary_swell_direction', 'secondary_swell_period',
+       'secondary_swell_height', 'secondary_swell_direction'], inplace=True)
     return df
 
 

@@ -44,3 +44,13 @@ def extraccion_meteo_api(ini, fin):
 def subtract30Days(date):
     """Resta a la fecha pasada un intervalo de 30 días"""
     return date - datetime.timedelta(days=30)
+
+
+def stringToDatetime(string):
+    """Transforma la fecha en formato año-mes-dia ('2024-01-21') al objeto datetime"""
+    return datetime.datetime.strptime(string, "%Y-%m-%d")
+
+'''
+df = extraccion_df_meteo(stringToDatetime('2024-01-01'), stringToDatetime('2024-05-07'))
+df.to_parquet('../raw/fuente_secundaria.parquet')
+'''

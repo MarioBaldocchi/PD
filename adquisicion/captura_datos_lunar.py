@@ -19,8 +19,6 @@ def adquirir_terciaria(date_from, date_to):
 
 
 '''
-# EJEMPLO
-
-df = adquirir_terciaria('2024-05-01', '2024-05-03')
-print(df)
+df = adquirir_terciaria('2024-01-01', '2024-05-07')
+df.to_parquet('../raw/fuente_terciaria.parquet', index=False)
 '''
